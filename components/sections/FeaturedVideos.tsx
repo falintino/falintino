@@ -23,11 +23,32 @@ export default function FeaturedVideos() {
       <Container>
 
         <SectionTitle
-          subtitle="VIDEOS"
-          title="Featured Videos"
+          subtitle="VIDEO RESMI"
+          title="Video Terbaru"
         />
 
-        <div className="mt-16 grid gap-8 lg:grid-cols-2">
+        <motion.p
+          initial={{
+            opacity: 0,
+            y: 20,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+          }}
+          transition={{
+            duration: 0.6,
+          }}
+          className="mx-auto mt-6 max-w-3xl text-center text-lg leading-8 text-zinc-400"
+        >
+          Saksikan video resmi terbaru Falintino dan ikuti karya musik
+          berikutnya melalui kanal YouTube resmi.
+        </motion.p>
+
+        <div className="mt-16">
 
           {videos.map((video, index) => {
 
@@ -71,7 +92,7 @@ export default function FeaturedVideos() {
                     alt={video.title}
                     width={900}
                     height={520}
-                    className="aspect-video w-full object-cover transition duration-700 group-hover:scale-110"
+                    className="aspect-video w-full object-cover transition duration-700 group-hover:scale-105"
                   />
 
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
@@ -107,7 +128,7 @@ export default function FeaturedVideos() {
                     </h3>
 
                     <p className="mt-2 text-zinc-400">
-                      Watch on {video.platform}
+                      Tonton di {video.platform}
                     </p>
 
                   </div>
