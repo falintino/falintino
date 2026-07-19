@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+/* ===========================
+   DESIGN SYSTEM
+=========================== */
+
+:root {
+  --background: #050505;
+  --foreground: #ffffff;
+
+  --primary: #1db954;
+
+  --card: rgba(24, 24, 27, 0.55);
+
+  --border: rgba(255, 255, 255, 0.08);
+
+  --radius: 32px;
+
+  --shadow:
+    0 0 70px rgba(29, 185, 84, .15);
+}
+
+/* ===========================
+   BASE
+=========================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-main), sans-serif;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===========================
+   GLOBAL
+=========================== */
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: var(--primary);
+  color: black;
+}
+
+section {
+  position: relative;
+  padding: 120px 0;
+}
+
+/* ===========================
+   SCROLLBAR
+=========================== */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090909;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1db954;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #24d463;
+}
+
+/* ===========================
+   GLASS
+=========================== */
+
+.glass {
+  background: rgba(255,255,255,.04);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+/* ===========================
+   GLOW
+=========================== */
+
+.green-glow {
+  box-shadow: 0 0 80px rgba(29,185,84,.22);
+}
+
+/* ===========================
+   CONTAINER
+=========================== */
+
+.container-padding {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* ===========================
+   ANIMATION
+=========================== */
+
+.fade-up {
+  animation: fadeUp .8s ease forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===========================
+   IMAGE
+=========================== */
+
+img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* ===========================
+   BUTTON
+=========================== */
+
+button,
+a {
+  transition: .3s;
+}
