@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
+
 import "./globals.css";
 
 import AnimatedBackground from "@/components/effects/AnimatedBackground";
@@ -11,8 +13,10 @@ const inter = Inter({
   display: "swap",
 });
 
+const SITE_URL = "https://www.falintino.com";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://falintino.com"),
+  metadataBase: new URL(SITE_URL),
 
   title: {
     default: "Falintino | Official Artist",
@@ -20,22 +24,25 @@ export const metadata: Metadata = {
   },
 
   description:
-    "Official website of Falintino. Explore music releases, videos, gallery, and official social media.",
+    "Official website of Falintino. Listen to the latest music, watch official videos, explore the gallery, and connect through official social media.",
 
   keywords: [
     "Falintino",
     "Falintino Official",
-    "Indonesian Artist",
-    "Musician",
+    "Falintino Music",
+    "Falintino Spotify",
+    "Falintino YouTube",
+    "Musician Indonesia",
+    "Music Artist",
     "Spotify",
     "TikTok",
     "YouTube",
-    "Music",
   ],
 
   authors: [
     {
       name: "Falintino",
+      url: SITE_URL,
     },
   ],
 
@@ -43,49 +50,56 @@ export const metadata: Metadata = {
 
   publisher: "Falintino",
 
+  alternates: {
+    canonical: SITE_URL,
+  },
+
   openGraph: {
     type: "website",
     locale: "id_ID",
-    url: "https://falintino.com",
-    title: "Falintino | Official Artist",
-    description:
-      "Listen to the latest music, watch videos, and explore the official website of Falintino.",
-
+    url: SITE_URL,
     siteName: "Falintino",
+
+    title: "Falintino | Official Artist",
+
+    description:
+      "Listen to the latest music, watch official videos, explore the gallery, and stay connected with Falintino.",
 
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Falintino",
+        alt: "Falintino Official",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
+
     title: "Falintino | Official Artist",
-    description:
-      "Official website of Falintino.",
+
+    description: "Official website of Falintino.",
+
     images: ["/og-image.jpg"],
   },
 
   robots: {
     index: true,
     follow: true,
-    nocache: false,
+
     googleBot: {
       index: true,
       follow: true,
       "max-image-preview": "large",
       "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
 
   icons: {
     icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
   },
 };
 
@@ -107,6 +121,8 @@ export default function RootLayout({
 
         {children}
       </body>
+
+      <GoogleAnalytics gaId="G-JZM2PRDWQK" />
     </html>
   );
 }
