@@ -7,6 +7,7 @@ import "./globals.css";
 import AnimatedBackground from "@/components/effects/AnimatedBackground";
 import CursorGlow from "@/components/effects/CursorGlow";
 import LoadingScreen from "@/components/effects/LoadingScreen";
+import StructuredData from "@/components/seo/StructuredData";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -118,6 +119,8 @@ export default function RootLayout({
         <AnimatedBackground />
 
         <CursorGlow />
+
+        <StructuredData />
 
         {children}
       </body>
