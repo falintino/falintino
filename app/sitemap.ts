@@ -1,17 +1,17 @@
 import type { MetadataRoute } from "next";
 
-const BASE_URL = "https://www.falintino.com";
-
 export default function sitemap(): MetadataRoute.Sitemap {
+  const siteUrl = "https://www.falintino.com";
+
   return [
     {
-      url: BASE_URL,
+      url: siteUrl,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,
     },
     {
-      url: `${BASE_URL}/music`,
+      url: `${siteUrl}/music`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
