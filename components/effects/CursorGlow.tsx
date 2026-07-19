@@ -1,78 +1,69 @@
 "use client";
 
 import { motion, useMotionValue, useSpring } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 export default function CursorGlow() {
-  const mouseX = useMotionValue(-100);
-  const mouseY = useMotionValue(-100);
+  const mouseX = useMotionValue(-200);
+  const mouseY = useMotionValue(-200);
 
   const x = useSpring(mouseX, {
-    stiffness: 300,
-    damping: 30,
+    stiffness: 180,
+    damping: 28,
+    mass: 0.3,
   });
 
   const y = useSpring(mouseY, {
-    stiffness: 300,
-    damping: 30,
+    stiffness: 180,
+    damping: 28,
+    mass: 0.3,
   });
 
-  const [visible, setVisible] = useState(false);
-  const [hover, setHover] = useState(false);
+  const glowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if ("ontouchstart" in window) return;
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
+    let raf = 0;
 
     const move = (e: MouseEvent) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
+      cancelAnimationFrame(raf);
 
-      if (!visible) setVisible(true);
-
-      const target = e.target as HTMLElement;
-
-      setHover(
-        !!target.closest(
-          "button,a,input,textarea,[role='button']"
-        )
-      );
+      raf = requestAnimationFrame(() => {
+        mouseX.set(e.clientX);
+        mouseY.set(e.clientY);
+      });
     };
 
-    window.addEventListener("mousemove", move);
+    window.addEventListener("mousemove", move, {
+      passive: true,
+    });
 
     return () => {
+      cancelAnimationFrame(raf);
       window.removeEventListener("mousemove", move);
     };
-  }, [mouseX, mouseY, visible]);
+  }, [mouseX, mouseY]);
 
-  if (typeof window !== "undefined" && "ontouchstart" in window) {
-    return null;
+  if (typeof window !== "undefined") {
+    if (window.matchMedia("(pointer: coarse)").matches) {
+      return null;
+    }
   }
 
   return (
     <>
-      {/* Glow Besar */}
-
       <motion.div
+        ref={glowRef}
         style={{
           x,
           y,
           translateX: "-50%",
           translateY: "-50%",
         }}
-        animate={{
-          width: hover ? 180 : 120,
-          height: hover ? 180 : 120,
-          opacity: visible ? 0.22 : 0,
-        }}
-        transition={{
-          duration: 0.25,
-        }}
-        className="pointer-events-none fixed left-0 top-0 z-[9998] rounded-full bg-[#1DB954] blur-[60px]"
+        className="pointer-events-none fixed left-0 top-0 z-[9998] h-28 w-28 rounded-full bg-[#1DB954]/20 blur-[55px]"
       />
 
-      {/* Ring */}
-
       <motion.div
         style={{
           x,
@@ -80,18 +71,9 @@ export default function CursorGlow() {
           translateX: "-50%",
           translateY: "-50%",
         }}
-        animate={{
-          width: hover ? 42 : 26,
-          height: hover ? 42 : 26,
-        }}
-        transition={{
-          duration: 0.18,
-        }}
-        className="pointer-events-none fixed left-0 top-0 z-[9999] rounded-full border border-[#1DB954]"
+        className="pointer-events-none fixed left-0 top-0 z-[9999] h-6 w-6 rounded-full border border-[#1DB954]/70"
       />
 
-      {/* Dot */}
-
       <motion.div
         style={{
           x,
@@ -99,7 +81,7 @@ export default function CursorGlow() {
           translateX: "-50%",
           translateY: "-50%",
         }}
-        className="pointer-events-none fixed left-0 top-0 z-[10000] h-2.5 w-2.5 rounded-full bg-[#1DB954]"
+        className="pointer-events-none fixed left-0 top-0 z-[10000] h-2 w-2 rounded-full bg-[#1DB954]"
       />
     </>
   );

@@ -7,5 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
     },
     sitemap: "https://falintino.com/sitemap.xml",
+    host: "https://falintino.com",
   };
 }

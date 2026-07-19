@@ -1,55 +1,61 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const blobs = [
   {
-    size: 700,
+    size: 560,
     color: "#1DB954",
-    top: "-12%",
-    left: "-10%",
-    duration: 18,
+    top: "-8%",
+    left: "-8%",
+    duration: 30,
   },
   {
-    size: 550,
+    size: 420,
     color: "#00E5A8",
-    top: "55%",
-    right: "-8%",
-    duration: 22,
+    top: "58%",
+    right: "-5%",
+    duration: 36,
   },
   {
-    size: 450,
+    size: 360,
     color: "#0EA5E9",
-    bottom: "-10%",
-    left: "35%",
-    duration: 20,
+    bottom: "-6%",
+    left: "34%",
+    duration: 40,
   },
 ];
 
 export default function AnimatedBackground() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-black">
 
-      {/* Aurora */}
       {blobs.map((blob, index) => (
         <motion.div
           key={index}
-          animate={{
-            x: [0, 40, -30, 0],
-            y: [0, -30, 40, 0],
-            scale: [1, 1.15, 0.95, 1],
-          }}
+          animate={
+            reduceMotion
+              ? undefined
+              : {
+                  x: [0, 20, -15, 0],
+                  y: [0, -15, 20, 0],
+                }
+          }
           transition={{
             duration: blob.duration,
             repeat: Infinity,
+            repeatType: "mirror",
             ease: "easeInOut",
           }}
-          className="absolute rounded-full blur-[170px]"
+          className="absolute rounded-full will-change-transform"
           style={{
             width: blob.size,
             height: blob.size,
             background: blob.color,
-            opacity: 0.14,
+            opacity: 0.12,
+            filter: "blur(140px)",
             top: blob.top,
             left: blob.left,
             right: blob.right,
@@ -59,25 +65,26 @@ export default function AnimatedBackground() {
       ))}
 
       {/* Grid */}
+
       <div
         className="
           absolute inset-0
-          opacity-[0.03]
+          opacity-[0.025]
           bg-[linear-gradient(rgba(255,255,255,.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.12)_1px,transparent_1px)]
-          bg-[size:70px_70px]
+          bg-[size:72px_72px]
         "
       />
 
       {/* Noise */}
+
       <div
-        className="absolute inset-0 opacity-[0.025]"
+        className="absolute inset-0 opacity-[0.015]"
         style={{
           backgroundImage:
             "radial-gradient(circle at center, white 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
+          backgroundSize: "30px 30px",
         }}
       />
-
     </div>
   );
 }

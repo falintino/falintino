@@ -1,14 +1,37 @@
+import dynamic from "next/dynamic";
+
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/Footer";
 
 import Hero from "@/components/sections/Hero";
-import LatestRelease from "@/components/sections/LatestRelease";
-import Discography from "@/components/sections/Discography";
-import About from "@/components/sections/About";
-import FeaturedVideos from "@/components/sections/FeaturedVideos";
-import Gallery from "@/components/sections/Gallery";
-import Press from "@/components/sections/Press";
-import Contact from "@/components/sections/Contact";
+
+const LatestRelease = dynamic(
+  () => import("@/components/sections/LatestRelease")
+);
+
+const Discography = dynamic(
+  () => import("@/components/sections/Discography")
+);
+
+const About = dynamic(
+  () => import("@/components/sections/About")
+);
+
+const FeaturedVideos = dynamic(
+  () => import("@/components/sections/FeaturedVideos")
+);
+
+const Gallery = dynamic(
+  () => import("@/components/sections/Gallery")
+);
+
+const Press = dynamic(
+  () => import("@/components/sections/Press")
+);
+
+const Contact = dynamic(
+  () => import("@/components/sections/Contact")
+);
 
 export default function Home() {
   return (

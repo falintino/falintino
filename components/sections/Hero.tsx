@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   FaSpotify,
   FaYoutube,
@@ -14,32 +14,40 @@ import NowPlayingCard from "../ui/NowPlayingCard";
 
 import { artist } from "@/data/artist";
 
-const letters = artist.name.toUpperCase().split("");
-
 export default function Hero() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <section
       id="home"
       className="relative overflow-hidden bg-black pt-28 text-white"
     >
       {/* Background */}
+
       <div className="absolute inset-0 overflow-hidden">
+
         <motion.div
-          animate={{
-            scale: [1, 1.15, 1],
-            opacity: [0.15, 0.28, 0.15],
-          }}
+          animate={
+            reduceMotion
+              ? undefined
+              : {
+                  opacity: [0.14, 0.2, 0.14],
+                }
+          }
           transition={{
-            duration: 12,
+            duration: 14,
             repeat: Infinity,
+            ease: "easeInOut",
           }}
-          className="absolute left-1/2 top-20 h-[700px] w-[700px] -translate-x-1/2 rounded-full bg-[#1DB954] blur-[180px]"
+          className="absolute left-1/2 top-20 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[#1DB954] blur-[140px]"
         />
 
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black" />
+
       </div>
 
       <Container>
+
         <div className="relative grid min-h-[92vh] items-center gap-20 lg:grid-cols-2">
 
           {/* LEFT */}
@@ -47,48 +55,107 @@ export default function Hero() {
           <div>
 
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              initial={{
+                opacity: 0,
+                y: 10,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                duration: 0.5,
+              }}
               className="inline-flex rounded-full border border-[#1DB954]/30 bg-[#1DB954]/10 px-5 py-2 text-xs font-bold tracking-[4px] text-[#1DB954]"
             >
               OFFICIAL WEBSITE
             </motion.div>
 
-            <h1 className="mt-8 flex flex-wrap text-6xl font-black leading-none lg:text-[96px]">
+            <motion.h1
+              initial={{
+                opacity: 0,
+                y: 30,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                duration: 0.6,
+              }}
+              className="mt-8 text-6xl font-black leading-none lg:text-[96px]"
+            >
+              {artist.name.toUpperCase()}
+            </motion.h1>
 
-              {letters.map((letter, index) => (
-                <motion.span
-                  key={index}
-                  initial={{
-                    opacity: 0,
-                    y: 40,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  transition={{
-                    delay: index * 0.05,
-                  }}
-                  className="mr-1"
-                >
-                  {letter}
-                </motion.span>
-              ))}
-
-            </h1>
-
-            <p className="mt-5 text-xl text-zinc-300">
+            <motion.p
+              initial={{
+                opacity: 0,
+                y: 20,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                delay: 0.1,
+                duration: 0.5,
+              }}
+              className="mt-5 text-xl text-zinc-300"
+            >
               Creator • Music Artist
-            </p>
+            </motion.p>
 
-            <p className="mt-8 max-w-xl text-lg leading-9 text-zinc-400">
+            <motion.p
+              initial={{
+                opacity: 0,
+                y: 20,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                delay: 0.2,
+                duration: 0.5,
+              }}
+              className="mt-8 max-w-xl text-lg leading-9 text-zinc-400"
+            >
               {artist.description}
-            </p>
+            </motion.p>
 
             {/* Latest Release */}
 
-            <div className="mt-10 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+            <motion.div
+              initial={{
+                opacity: 0,
+                y: 25,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                delay: 0.3,
+                duration: 0.5,
+              }}
+              className="mt-10 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl"
+            >
 
               <p className="text-xs uppercase tracking-[3px] text-[#1DB954]">
                 Latest Release
@@ -102,11 +169,28 @@ export default function Hero() {
                 Released • July 7, 2026
               </p>
 
-            </div>
+            </motion.div>
 
             {/* CTA */}
 
-            <div className="mt-10 flex flex-wrap gap-5">
+            <motion.div
+              initial={{
+                opacity: 0,
+                y: 20,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                delay: 0.35,
+                duration: 0.5,
+              }}
+              className="mt-10 flex flex-wrap gap-5"
+            >
 
               <Button href={artist.spotify}>
                 <FaSpotify className="mr-3" />
@@ -121,7 +205,7 @@ export default function Hero() {
                 Watch on YouTube
               </a>
 
-            </div>
+            </motion.div>
 
             {/* Stats */}
 
@@ -168,17 +252,22 @@ export default function Hero() {
           {/* RIGHT */}
 
           <motion.div
-            animate={{
-              y: [0, -12, 0],
-            }}
+            animate={
+              reduceMotion
+                ? undefined
+                : {
+                    y: [0, -6, 0],
+                  }
+            }
             transition={{
-              duration: 5,
+              duration: 8,
               repeat: Infinity,
+              ease: "easeInOut",
             }}
             className="relative flex justify-center"
           >
 
-            <div className="absolute h-[520px] w-[520px] rounded-full bg-[#1DB954]/20 blur-[120px]" />
+            <div className="absolute h-[420px] w-[420px] rounded-full bg-[#1DB954]/20 blur-[100px]" />
 
             <Image
               src={artist.heroImage}
@@ -186,22 +275,26 @@ export default function Hero() {
               width={560}
               height={760}
               priority
-              className="relative rounded-[40px] border border-white/10 shadow-[0_0_120px_rgba(29,185,84,.25)]"
+              sizes="(max-width:768px) 100vw, 560px"
+              className="relative rounded-[40px] border border-white/10 shadow-[0_0_80px_rgba(29,185,84,.20)]"
             />
 
           </motion.div>
 
         </div>
 
-        {/* Scroll */}
-
         <motion.div
-          animate={{
-            y: [0, 10, 0],
-          }}
+          animate={
+            reduceMotion
+              ? undefined
+              : {
+                  y: [0, 6, 0],
+                }
+          }
           transition={{
-            duration: 1.6,
+            duration: 2.4,
             repeat: Infinity,
+            ease: "easeInOut",
           }}
           className="pb-8 text-center text-zinc-500"
         >
