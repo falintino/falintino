@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://falintino.com/sitemap.xml",
-    host: "https://falintino.com",
+    sitemap: "https://www.falintino.com/sitemap.xml",
+    host: "https://www.falintino.com",
   };
 }
