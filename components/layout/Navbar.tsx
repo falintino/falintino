@@ -7,8 +7,8 @@ import { HiMenuAlt3, HiX } from "react-icons/hi";
 
 const links = [
   { label: "Home", href: "/#home", sectionId: "home" },
-  { label: "Music", href: "/#music", sectionId: "music" },
-  { label: "About", href: "/#about", sectionId: "about" },
+  { label: "Music", href: "/music", sectionId: null },
+  { label: "About", href: "/about", sectionId: null },
   { label: "Videos", href: "/#videos", sectionId: "videos" },
   { label: "Gallery", href: "/#gallery", sectionId: "gallery" },
   { label: "Contact", href: "/#contact", sectionId: "contact" },
@@ -64,7 +64,11 @@ export default function Navbar() {
         }`}
       >
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-          <Link href="/" className="text-2xl font-black tracking-wide">
+          <Link
+            href="/"
+            className="text-2xl font-black tracking-wide"
+            aria-label="Falintino Official Website"
+          >
             <span className="text-[#1DB954]">F</span>alintino
           </Link>
 
@@ -95,7 +99,9 @@ export default function Navbar() {
                     />
                   )}
 
-                  <span className="relative z-10">{item.label}</span>
+                  <span className="relative z-10">
+                    {item.label}
+                  </span>
                 </Link>
               );
             })}
