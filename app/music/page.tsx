@@ -1,171 +1,178 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
-import { FaSpotify, FaYoutube } from "react-icons/fa";
+import { FaSpotify } from "react-icons/fa";
+
+import { music } from "@/data/music";
 
 export const metadata: Metadata = {
-  title: "Falintino Music | Official Releases",
-
+  title: "Music | Falintino Official",
   description:
-    "Official music page of Falintino. Listen to Di Balik Layar and explore Falintino's official music releases, Spotify artist profile, and music videos.",
+    "Official music releases by Falintino. Listen to Di Balik Layar and discover the latest releases from Falintino.",
 
   alternates: {
     canonical: "https://www.falintino.com/music",
   },
 
   openGraph: {
-    title: "Falintino Music | Official Releases",
+    title: "Music | Falintino Official",
     description:
-      "Official music releases and artist profile of Falintino.",
+      "Official music releases and discography of Falintino.",
     url: "https://www.falintino.com/music",
     siteName: "Falintino",
     type: "website",
-    images: [
-      {
-        url: "/images/releases/di-balik-layar.jpeg",
-        width: 1200,
-        height: 1200,
-        alt: "Di Balik Layar by Falintino",
-      },
-    ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Falintino Music | Official Releases",
+    title: "Music | Falintino Official",
     description:
-      "Official music releases and artist profile of Falintino.",
-    images: ["/images/releases/di-balik-layar.jpeg"],
-  },
-};
-
-const musicSchema = {
-  "@context": "https://schema.org",
-  "@type": "MusicRecording",
-
-  name: "Di Balik Layar",
-
-  url: "https://www.falintino.com/music",
-
-  image:
-    "https://www.falintino.com/images/releases/di-balik-layar.jpeg",
-
-  datePublished: "2026-07-07",
-
-  byArtist: {
-    "@type": "Person",
-    name: "Falintino",
-    url: "https://www.falintino.com",
-    sameAs: [
-      "https://open.spotify.com/artist/4uAv6DgSzS3d6ESFLdJyji",
-      "https://www.tiktok.com/@aprilfullskin",
-      "https://www.youtube.com/channel/UCGry5noC1A-0DxXaKo6igcg",
-      "https://www.instagram.com/falintino07",
-    ],
+      "Listen to official music releases by Falintino.",
   },
 };
 
 export default function MusicPage() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "MusicGroup",
+        "@id": "https://www.falintino.com/#artist",
+        name: "Falintino",
+        url: "https://www.falintino.com/",
+        sameAs: [
+          "https://open.spotify.com/artist/4uAv6DgSzS3d6ESFLdJyji",
+          "https://www.tiktok.com/@aprilfullskin",
+          "https://www.youtube.com/channel/UCGry5noC1A-0DxXaKo6igcg",
+          "https://www.instagram.com/falintino07",
+        ],
+      },
+
+      ...music.map((song) => ({
+        "@type": "MusicRecording",
+        "@id": `https://www.falintino.com/music#${song.id}`,
+        name: song.title,
+        datePublished: song.releaseDate,
+        url: song.spotify,
+        image: `https://www.falintino.com${song.cover}`,
+
+        byArtist: {
+          "@id": "https://www.falintino.com/#artist",
+        },
+
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": "https://www.falintino.com/music",
+        },
+      })),
+    ],
+  };
+
   return (
-    <>
+    <main className="min-h-screen bg-black px-6 pb-24 pt-36 text-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(musicSchema),
+          __html: JSON.stringify(structuredData),
         }}
       />
 
-      <main className="min-h-screen bg-[#030712] px-4 py-24 text-white">
-        <section className="mx-auto max-w-6xl">
+      <section className="mx-auto max-w-7xl">
+        {/* HEADER */}
 
-          <div className="mb-14 text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#1DB954]">
-              Official Music
-            </p>
+        <div className="mb-16">
+          <p className="text-sm font-bold uppercase tracking-[0.3em] text-[#1DB954]">
+            Official Discography
+          </p>
 
-            <h1 className="text-4xl font-black tracking-tight sm:text-5xl lg:text-6xl">
-              Falintino Music
-            </h1>
+          <h1 className="mt-4 text-5xl font-black sm:text-6xl">
+            Falintino Music
+          </h1>
 
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/60 sm:text-lg">
-              Official releases, music videos, and artist profiles from
-              Falintino.
-            </p>
-          </div>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-400">
+            Explore official music releases by Falintino and listen on
+            Spotify.
+          </p>
+        </div>
 
-          <article className="grid overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] lg:grid-cols-2">
-            <div className="relative aspect-square min-h-[380px] overflow-hidden bg-black">
-              <Image
-                src="/images/releases/di-balik-layar.jpeg"
-                alt="Di Balik Layar by Falintino"
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-              />
-            </div>
+        {/* MUSIC GRID */}
 
-            <div className="flex flex-col justify-center p-8 sm:p-10 lg:p-12">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#1DB954]">
-                Latest Release
-              </p>
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {music.map((song) => (
+            <article
+              key={song.id}
+              className="group overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.04]"
+            >
+              {/* COVER */}
 
-              <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-                Di Balik Layar
-              </h2>
+              <div className="relative aspect-square overflow-hidden bg-zinc-900">
+                <Image
+                  src={song.cover}
+                  alt={`${song.title} by Falintino`}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover transition duration-500 group-hover:scale-105"
+                  priority={song.featured}
+                />
+              </div>
 
-              <p className="mt-3 text-lg text-white/70">
-                Falintino
-              </p>
+              {/* INFO */}
 
-              <p className="mt-2 text-sm text-white/40">
-                Released July 7, 2026
-              </p>
+              <div className="p-7">
+                {song.featured && (
+                  <p className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-[#1DB954]">
+                    Latest Release
+                  </p>
+                )}
 
-              <p className="mt-7 max-w-xl leading-8 text-white/60">
-                Di Balik Layar is an official music release by Falintino,
-                marking his debut as a music artist.
-              </p>
+                <h2 className="text-2xl font-bold">
+                  {song.title}
+                </h2>
 
-              <div className="mt-8 flex flex-wrap gap-4">
+                <p className="mt-2 text-sm text-zinc-500">
+                  Falintino •{" "}
+                  {new Date(`${song.releaseDate}T00:00:00`).toLocaleDateString(
+                    "en-US",
+                    {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    }
+                  )}
+                </p>
+
                 <a
-                  href="https://open.spotify.com/artist/4uAv6DgSzS3d6ESFLdJyji"
+                  href={song.spotify}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center rounded-full bg-[#1DB954] px-6 py-3 font-semibold text-black transition hover:-translate-y-0.5"
+                  className="mt-7 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#1DB954] px-6 py-3.5 font-bold text-black transition hover:scale-[1.02] hover:bg-[#1ed760]"
                 >
-                  <FaSpotify className="mr-3" />
+                  <FaSpotify size={20} />
+
                   Listen on Spotify
                 </a>
-
-                <a
-                  href="https://www.youtube.com/channel/UCGry5noC1A-0DxXaKo6igcg"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center rounded-full border border-white/10 px-6 py-3 font-semibold transition hover:border-white/30"
-                >
-                  <FaYoutube className="mr-3" />
-                  Watch on YouTube
-                </a>
               </div>
-            </div>
-          </article>
+            </article>
+          ))}
+        </div>
 
-          <div className="mt-10 rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-center">
-            <p className="text-sm leading-6 text-white/50">
-              Music released under the official Falintino artist identity.
-            </p>
+        {/* ARTIST INFO */}
 
-            <Link
-              href="/socials"
-              className="mt-4 inline-flex text-sm font-semibold text-[#1DB954] hover:underline"
-            >
-              View Falintino&apos;s official social media →
-            </Link>
-          </div>
+        <div className="mt-16 rounded-[32px] border border-white/10 bg-white/[0.03] p-8">
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#1DB954]">
+            Artist
+          </p>
 
-        </section>
-      </main>
-    </>
+          <h2 className="mt-3 text-3xl font-bold">
+            Falintino
+          </h2>
+
+          <p className="mt-4 max-w-3xl leading-8 text-zinc-400">
+            Falintino is an Indonesian content creator and music artist.
+            This page contains official music releases and links to Falintino&apos;s
+            music on streaming platforms.
+          </p>
+        </div>
+      </section>
+    </main>
   );
 }
