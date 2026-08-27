@@ -75,7 +75,7 @@ const socialProfiles = [
 export default function SocialsPage() {
   return (
     <main className="min-h-screen bg-[#030712] px-4 py-24 text-white">
-      <section className="mx-auto max-w-6xl">
+      <section className="mx-auto max-w-[1500px]">
 
         {/* HEADER */}
         <div className="mb-12 text-center">
@@ -94,7 +94,7 @@ export default function SocialsPage() {
         </div>
 
         {/* SOCIAL CARDS */}
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
           {socialProfiles.map((social) => {
             const Icon = social.icon;
 
@@ -103,37 +103,39 @@ export default function SocialsPage() {
                 key={social.name}
                 className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04]"
               >
+
                 {/* SCREENSHOT */}
-                <div className="relative h-[460px] w-full overflow-hidden bg-black">
+                <div className="relative h-[400px] w-full overflow-hidden bg-black">
                   <Image
                     src={social.image}
                     alt={`${social.name} profile of Falintino`}
                     fill
                     priority
-                    sizes="(max-width: 768px) 100vw, 50vw"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
                     className="object-cover object-top"
                   />
                 </div>
 
                 {/* ACCOUNT INFO */}
-                <div className="p-6">
+                <div className="p-5">
+
                   <div className="mb-4 flex items-center gap-3">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/10">
-                      <Icon className="text-xl" />
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/10">
+                      <Icon className="text-lg" />
                     </div>
 
-                    <div>
-                      <h2 className="text-xl font-semibold">
+                    <div className="min-w-0">
+                      <h2 className="text-lg font-semibold">
                         {social.name}
                       </h2>
 
-                      <p className="text-sm font-medium text-white/70">
+                      <p className="truncate text-sm font-medium text-white/70">
                         {social.handle}
                       </p>
                     </div>
                   </div>
 
-                  <p className="text-sm leading-6 text-white/50">
+                  <p className="min-h-[48px] text-sm leading-6 text-white/50">
                     {social.description}
                   </p>
 
@@ -145,6 +147,7 @@ export default function SocialsPage() {
                   >
                     Visit {social.name} →
                   </a>
+
                 </div>
               </article>
             );
@@ -165,6 +168,7 @@ export default function SocialsPage() {
             .
           </p>
         </div>
+
       </section>
     </main>
   );

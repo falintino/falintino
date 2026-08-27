@@ -23,9 +23,7 @@ export default function Hero() {
       className="relative overflow-hidden bg-black pt-28 text-white"
     >
       {/* Background */}
-
       <div className="absolute inset-0 overflow-hidden">
-
         <motion.div
           animate={
             reduceMotion
@@ -43,120 +41,46 @@ export default function Hero() {
         />
 
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black" />
-
       </div>
 
       <Container>
-
         <div className="relative grid min-h-[92vh] items-center gap-20 lg:grid-cols-2">
 
           {/* LEFT */}
-
           <div>
 
             <motion.div
-              initial={{
-                opacity: 0,
-                y: 10,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
+              animate={
+                reduceMotion
+                  ? undefined
+                  : {
+                      y: [0, -2, 0],
+                    }
+              }
               transition={{
-                duration: 0.5,
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut",
               }}
               className="inline-flex rounded-full border border-[#1DB954]/30 bg-[#1DB954]/10 px-5 py-2 text-xs font-bold tracking-[4px] text-[#1DB954]"
             >
               OFFICIAL WEBSITE
             </motion.div>
 
-            <motion.h1
-              initial={{
-                opacity: 0,
-                y: 30,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
-              transition={{
-                duration: 0.6,
-              }}
-              className="mt-8 text-6xl font-black leading-none lg:text-[96px]"
-            >
+            <h1 className="mt-8 text-6xl font-black leading-none lg:text-[96px]">
               {artist.name.toUpperCase()}
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              initial={{
-                opacity: 0,
-                y: 20,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
-              transition={{
-                delay: 0.1,
-                duration: 0.5,
-              }}
-              className="mt-5 text-xl text-zinc-300"
-            >
+            <p className="mt-5 text-xl text-zinc-300">
               Creator • Music Artist
-            </motion.p>
+            </p>
 
-            <motion.p
-              initial={{
-                opacity: 0,
-                y: 20,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
-              transition={{
-                delay: 0.2,
-                duration: 0.5,
-              }}
-              className="mt-8 max-w-xl text-lg leading-9 text-zinc-400"
-            >
+            <p className="mt-8 max-w-xl text-lg leading-9 text-zinc-400">
               {artist.description}
-            </motion.p>
+            </p>
 
             {/* Latest Release */}
-
-            <motion.div
-              initial={{
-                opacity: 0,
-                y: 25,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
-              transition={{
-                delay: 0.3,
-                duration: 0.5,
-              }}
-              className="mt-10 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl"
-            >
-
+            <div className="mt-10 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
               <p className="text-xs uppercase tracking-[3px] text-[#1DB954]">
                 Latest Release
               </p>
@@ -168,30 +92,10 @@ export default function Hero() {
               <p className="mt-2 text-zinc-400">
                 Released • July 7, 2026
               </p>
-
-            </motion.div>
+            </div>
 
             {/* CTA */}
-
-            <motion.div
-              initial={{
-                opacity: 0,
-                y: 20,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
-              transition={{
-                delay: 0.35,
-                duration: 0.5,
-              }}
-              className="mt-10 flex flex-wrap gap-5"
-            >
-
+            <div className="mt-10 flex flex-wrap gap-5">
               <Button href={artist.spotify}>
                 <FaSpotify className="mr-3" />
                 Listen on Spotify
@@ -204,13 +108,10 @@ export default function Hero() {
                 <FaYoutube className="mr-3" />
                 Watch on YouTube
               </a>
-
-            </motion.div>
+            </div>
 
             {/* Stats */}
-
             <div className="mt-14 grid grid-cols-3 gap-8">
-
               <div>
                 <h3 className="text-3xl font-bold text-[#1DB954]">
                   47M+
@@ -240,7 +141,6 @@ export default function Hero() {
                   Artist Debut
                 </p>
               </div>
-
             </div>
 
             <div className="mt-12">
@@ -250,7 +150,6 @@ export default function Hero() {
           </div>
 
           {/* RIGHT */}
-
           <motion.div
             animate={
               reduceMotion
@@ -266,19 +165,17 @@ export default function Hero() {
             }}
             className="relative flex justify-center"
           >
-
             <div className="absolute h-[420px] w-[420px] rounded-full bg-[#1DB954]/20 blur-[100px]" />
 
             <Image
               src={artist.heroImage}
-              alt={artist.name}
+              alt="Falintino, Indonesian content creator and music artist"
               width={560}
               height={760}
               priority
               sizes="(max-width:768px) 100vw, 560px"
               className="relative rounded-[40px] border border-white/10 shadow-[0_0_80px_rgba(29,185,84,.20)]"
             />
-
           </motion.div>
 
         </div>
