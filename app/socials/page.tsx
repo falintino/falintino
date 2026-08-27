@@ -72,104 +72,151 @@ const socialProfiles = [
   },
 ];
 
+const profilePageSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+
+  name: "Falintino Social Media",
+  url: "https://www.falintino.com/socials",
+
+  description:
+    "Official social media accounts and digital profiles associated with Falintino.",
+
+  mainEntity: {
+    "@type": "Person",
+
+    name: "Falintino",
+
+    alternateName: [
+      "@aprilfullskin",
+      "7 April FF",
+    ],
+
+    url: "https://www.falintino.com",
+
+    image: "https://www.falintino.com/og-image.jpg",
+
+    jobTitle: [
+      "Content Creator",
+      "Music Artist",
+    ],
+
+    sameAs: [
+      "https://www.tiktok.com/@aprilfullskin",
+      "https://www.youtube.com/channel/UCGry5noC1A-0DxXaKo6igcg",
+      "https://www.instagram.com/falintino07",
+      "https://open.spotify.com/artist/4uAv6DgSzS3d6ESFLdJyji",
+    ],
+  },
+};
+
 export default function SocialsPage() {
   return (
-    <main className="min-h-screen bg-[#030712] px-4 py-24 text-white">
-      <section className="mx-auto max-w-[1500px]">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(profilePageSchema),
+        }}
+      />
 
-        {/* HEADER */}
-        <div className="mb-12 text-center">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-white/50">
-            Official Accounts
-          </p>
+      <main className="min-h-screen bg-[#030712] px-4 py-24 text-white">
+        <section className="mx-auto max-w-[1500px]">
 
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-            Falintino Social Media
-          </h1>
+          {/* HEADER */}
+          <div className="mb-12 text-center">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-white/50">
+              Official Accounts
+            </p>
 
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/60 sm:text-lg">
-            Official social media accounts and digital profiles associated with
-            Falintino.
-          </p>
-        </div>
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+              Falintino Social Media
+            </h1>
 
-        {/* SOCIAL CARDS */}
-        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-          {socialProfiles.map((social) => {
-            const Icon = social.icon;
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/60 sm:text-lg">
+              Official social media accounts and digital profiles associated with
+              Falintino.
+            </p>
+          </div>
 
-            return (
-              <article
-                key={social.name}
-                className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04]"
-              >
+          {/* SOCIAL CARDS */}
+          <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+            {socialProfiles.map((social) => {
+              const Icon = social.icon;
 
-                {/* SCREENSHOT */}
-                <div className="relative h-[400px] w-full overflow-hidden bg-black">
-                  <Image
-                    src={social.image}
-                    alt={`${social.name} profile of Falintino`}
-                    fill
-                    priority
-                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
-                    className="object-cover object-top"
-                  />
-                </div>
+              return (
+                <article
+                  key={social.name}
+                  className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04]"
+                >
 
-                {/* ACCOUNT INFO */}
-                <div className="p-5">
-
-                  <div className="mb-4 flex items-center gap-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/10">
-                      <Icon className="text-lg" />
-                    </div>
-
-                    <div className="min-w-0">
-                      <h2 className="text-lg font-semibold">
-                        {social.name}
-                      </h2>
-
-                      <p className="truncate text-sm font-medium text-white/70">
-                        {social.handle}
-                      </p>
-                    </div>
+                  {/* SCREENSHOT */}
+                  <div className="relative h-[400px] w-full overflow-hidden bg-black">
+                    <Image
+                      src={social.image}
+                      alt={`${social.name} profile of Falintino`}
+                      fill
+                      priority
+                      sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
+                      className="object-cover object-top"
+                    />
                   </div>
 
-                  <p className="min-h-[48px] text-sm leading-6 text-white/50">
-                    {social.description}
-                  </p>
+                  {/* ACCOUNT INFO */}
+                  <div className="p-5">
 
-                  <a
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-5 inline-flex w-full items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] px-4 py-3 text-sm font-semibold transition duration-300 hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/[0.10]"
-                  >
-                    Visit {social.name} →
-                  </a>
+                    <div className="mb-4 flex items-center gap-3">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/10">
+                        <Icon className="text-lg" />
+                      </div>
 
-                </div>
-              </article>
-            );
-          })}
-        </div>
+                      <div className="min-w-0">
+                        <h2 className="text-lg font-semibold">
+                          {social.name}
+                        </h2>
 
-        {/* OFFICIAL WEBSITE */}
-        <div className="mt-10 rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-center">
-          <p className="text-sm leading-6 text-white/50">
-            These links are provided through Falintino&apos;s official website
-            at{" "}
-            <a
-              href="https://www.falintino.com"
-              className="font-semibold text-white transition hover:underline"
-            >
-              falintino.com
-            </a>
-            .
-          </p>
-        </div>
+                        <p className="truncate text-sm font-medium text-white/70">
+                          {social.handle}
+                        </p>
+                      </div>
+                    </div>
 
-      </section>
-    </main>
+                    <p className="min-h-[48px] text-sm leading-6 text-white/50">
+                      {social.description}
+                    </p>
+
+                    <a
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-5 inline-flex w-full items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] px-4 py-3 text-sm font-semibold transition duration-300 hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/[0.10]"
+                    >
+                      Visit {social.name} →
+                    </a>
+
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+
+          {/* OFFICIAL WEBSITE */}
+          <div className="mt-10 rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-center">
+            <p className="text-sm leading-6 text-white/50">
+              These links are provided through Falintino&apos;s official website
+              at{" "}
+              <a
+                href="https://www.falintino.com"
+                className="font-semibold text-white transition hover:underline"
+              >
+                falintino.com
+              </a>
+              .
+            </p>
+          </div>
+
+        </section>
+      </main>
+    </>
   );
 }
