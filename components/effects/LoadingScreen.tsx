@@ -9,82 +9,78 @@ export default function LoadingScreen() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 850);
+    }, 700);
 
     return () => clearTimeout(timer);
   }, []);
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence>
       {loading && (
         <motion.div
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          initial={{
+            opacity: 1,
+          }}
+          exit={{
+            opacity: 0,
+            y: -10,
+          }}
           transition={{
-            duration: 0.35,
+            duration: 0.25,
             ease: "easeOut",
           }}
-          className="fixed inset-0 z-[99999] flex items-center justify-center bg-black"
+          className="pointer-events-none fixed inset-x-0 top-0 z-[99999]"
+          aria-hidden="true"
         >
-          <div className="text-center">
-
+          {/* TOP PROGRESS BAR */}
+          <div className="h-[3px] w-full overflow-hidden bg-white/5">
             <motion.div
               initial={{
-                scale: 0.9,
-                opacity: 0,
+                width: "0%",
               }}
               animate={{
-                scale: 1,
-                opacity: 1,
+                width: "100%",
               }}
               transition={{
-                duration: 0.45,
+                duration: 0.65,
                 ease: "easeOut",
               }}
-              className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-[#1DB954] text-5xl font-black text-black shadow-[0_0_50px_rgba(29,185,84,.45)]"
-            >
+              className="h-full bg-[#1DB954] shadow-[0_0_18px_rgba(29,185,84,0.8)]"
+            />
+          </div>
+
+          {/* SMALL BRAND BADGE */}
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: -15,
+              scale: 0.96,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+            }}
+            transition={{
+              duration: 0.3,
+              ease: "easeOut",
+            }}
+            className="mx-auto mt-4 flex w-fit items-center gap-3 rounded-full border border-white/10 bg-black/70 px-4 py-2.5 shadow-2xl backdrop-blur-xl"
+          >
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1DB954] text-sm font-black text-black">
               F
-            </motion.div>
-
-            <motion.h1
-              initial={{
-                y: 18,
-                opacity: 0,
-              }}
-              animate={{
-                y: 0,
-                opacity: 1,
-              }}
-              transition={{
-                delay: 0.15,
-                duration: 0.4,
-              }}
-              className="mt-8 text-5xl font-black tracking-[8px]"
-            >
-              FALINTINO
-            </motion.h1>
-
-            <p className="mt-3 text-zinc-500">
-              Official Artist
-            </p>
-
-            <div className="mx-auto mt-8 h-1.5 w-52 overflow-hidden rounded-full bg-zinc-800">
-              <motion.div
-                initial={{
-                  width: 0,
-                }}
-                animate={{
-                  width: "100%",
-                }}
-                transition={{
-                  duration: 0.8,
-                  ease: "easeOut",
-                }}
-                className="h-full rounded-full bg-[#1DB954]"
-              />
             </div>
 
-          </div>
+            <div>
+              <p className="text-xs font-bold tracking-[0.18em] text-white">
+                FALINTINO
+              </p>
+
+              <p className="text-[10px] text-white/40">
+                Official Website
+              </p>
+            </div>
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
