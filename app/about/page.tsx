@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: "About Falintino | Content Creator & Music Artist",
 
   description:
-    "Learn about Falintino, an Indonesian content creator and music artist from West Kalimantan, known through TikTok @aprilfullskin, YouTube 7 April FF, and his music releases.",
+    "Learn about Falintino, an Indonesian content creator and music artist from West Kalimantan, known through TikTok Falintino (@aprilfullskin), YouTube 7 April FF, and his music releases.",
 
   alternates: {
     canonical: "https://www.falintino.com/about",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "About Falintino | Content Creator & Music Artist",
     description:
-      "Official profile of Falintino, Indonesian content creator and music artist known through TikTok @aprilfullskin and YouTube 7 April FF.",
+      "Official profile of Falintino, Indonesian content creator and music artist known through TikTok Falintino (@aprilfullskin) and YouTube 7 April FF.",
     url: "https://www.falintino.com/about",
     siteName: "Falintino",
     type: "profile",
@@ -82,7 +82,7 @@ const aboutSchema = {
       image: "https://www.falintino.com/images/artist/hero.jpeg",
 
       description:
-        "Falintino is an Indonesian content creator and music artist from West Kalimantan. He is known through the TikTok account @aprilfullskin and the YouTube channel 7 April FF.",
+        "Falintino is an Indonesian content creator and music artist from West Kalimantan. He is known through the TikTok profile Falintino (@aprilfullskin) and the YouTube channel 7 April FF.",
 
       jobTitle: [
         "Content Creator",
@@ -102,7 +102,7 @@ const aboutSchema = {
 const socialLinks = [
   {
     name: "TikTok",
-    label: "@aprilfullskin",
+    label: "Falintino (@aprilfullskin)",
     href: artist.tiktok,
     icon: FaTiktok,
   },
@@ -190,13 +190,13 @@ export default function AboutPage() {
 
               <p className="mt-7 text-lg leading-9 text-zinc-400">
                 Falintino adalah kreator konten dan musisi asal Kalimantan
-                Barat, Indonesia. Ia dikenal melalui akun TikTok
+                Barat, Indonesia. Ia dikenal melalui akun TikTok{" "}
                 <strong className="font-semibold text-white">
-                  {" "}@aprilfullskin
+                  Falintino (@aprilfullskin)
                 </strong>{" "}
-                dan kanal YouTube
+                dan kanal YouTube{" "}
                 <strong className="font-semibold text-white">
-                  {" "}7 April FF
+                  7 April FF
                 </strong>.
               </p>
 
