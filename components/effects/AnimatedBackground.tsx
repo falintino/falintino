@@ -1,55 +1,34 @@
-"use client";
-
-import { motion, useReducedMotion } from "framer-motion";
-
 const blobs = [
   {
     size: 560,
     color: "#1DB954",
     top: "-8%",
     left: "-8%",
-    duration: 30,
   },
   {
     size: 420,
     color: "#00E5A8",
     top: "58%",
     right: "-5%",
-    duration: 36,
   },
   {
     size: 360,
     color: "#0EA5E9",
     bottom: "-6%",
     left: "34%",
-    duration: 40,
   },
 ];
 
 export default function AnimatedBackground() {
-  const reduceMotion = useReducedMotion();
-
   return (
-    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-black">
-
+    <div
+      aria-hidden="true"
+      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-black"
+    >
       {blobs.map((blob, index) => (
-        <motion.div
+        <div
           key={index}
-          animate={
-            reduceMotion
-              ? undefined
-              : {
-                  x: [0, 20, -15, 0],
-                  y: [0, -15, 20, 0],
-                }
-          }
-          transition={{
-            duration: blob.duration,
-            repeat: Infinity,
-            repeatType: "mirror",
-            ease: "easeInOut",
-          }}
-          className="absolute rounded-full will-change-transform"
+          className="absolute rounded-full"
           style={{
             width: blob.size,
             height: blob.size,
@@ -64,8 +43,7 @@ export default function AnimatedBackground() {
         />
       ))}
 
-      {/* Grid */}
-
+      {/* GRID */}
       <div
         className="
           absolute inset-0
@@ -75,8 +53,7 @@ export default function AnimatedBackground() {
         "
       />
 
-      {/* Noise */}
-
+      {/* NOISE */}
       <div
         className="absolute inset-0 opacity-[0.015]"
         style={{
