@@ -9,6 +9,13 @@ import SectionTitle from "../ui/SectionTitle";
 import { artist } from "@/data/artist";
 import { socials } from "@/data/socials";
 
+const accountDescriptions: Record<string, string> = {
+  Spotify: "Falintino on Spotify",
+  YouTube: "Official YouTube: @aprilfullskin (7 April FF)",
+  TikTok: "Official TikTok: @aprilfullskin (Falintino)",
+  Instagram: "Official Instagram: @falintino07 (Falintino)",
+};
+
 export default function Contact() {
   return (
     <section
@@ -84,6 +91,9 @@ export default function Contact() {
             {socials.map((item) => {
               const Icon = item.icon;
 
+              const description =
+                accountDescriptions[item.name] ?? item.description;
+
               return (
                 <a
                   key={item.name}
@@ -104,7 +114,7 @@ export default function Contact() {
                       </h3>
 
                       <p className="mt-1 text-sm text-zinc-500">
-                        {item.description}
+                        {description}
                       </p>
                     </div>
 

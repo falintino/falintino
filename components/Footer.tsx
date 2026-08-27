@@ -84,14 +84,14 @@ export default function Footer() {
               </Link>
 
               <Link
-                href="/#music"
+                href="/music"
                 className="text-zinc-400 hover:text-[#1DB954]"
               >
                 Music
               </Link>
 
               <Link
-                href="/#about"
+                href="/about"
                 className="text-zinc-400 hover:text-[#1DB954]"
               >
                 About
@@ -134,8 +134,7 @@ export default function Footer() {
             </h3>
 
             <p className="mb-6 max-w-sm text-sm leading-6 text-zinc-500">
-              Connect with Falintino through verified and official digital
-              profiles.
+              Connect with Falintino through official digital profiles.
             </p>
 
             <div className="flex flex-wrap gap-4">
@@ -165,9 +164,9 @@ export default function Footer() {
                   href="https://www.tiktok.com/@aprilfullskin"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-zinc-300 hover:text-[#1DB954]"
+                  className="font-medium text-zinc-300 hover:text-[#1DB954]"
                 >
-                  @aprilfullskin
+                  @aprilfullskin (Falintino)
                 </a>
               </p>
 
@@ -177,9 +176,9 @@ export default function Footer() {
                   href="https://www.youtube.com/channel/UCGry5noC1A-0DxXaKo6igcg"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-zinc-300 hover:text-[#1DB954]"
+                  className="font-medium text-zinc-300 hover:text-[#1DB954]"
                 >
-                  7 April FF
+                  @aprilfullskin (7 April FF)
                 </a>
               </p>
 
@@ -189,9 +188,9 @@ export default function Footer() {
                   href="https://www.instagram.com/falintino07"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-zinc-300 hover:text-[#1DB954]"
+                  className="font-medium text-zinc-300 hover:text-[#1DB954]"
                 >
-                  @falintino07
+                  @falintino07 (Falintino)
                 </a>
               </p>
 
@@ -201,7 +200,7 @@ export default function Footer() {
                   href="https://open.spotify.com/artist/4uAv6DgSzS3d6ESFLdJyji"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-zinc-300 hover:text-[#1DB954]"
+                  className="font-medium text-zinc-300 hover:text-[#1DB954]"
                 >
                   Falintino
                 </a>
