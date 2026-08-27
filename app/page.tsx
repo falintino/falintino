@@ -4,6 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/Footer";
 
 import Hero from "@/components/sections/Hero";
+import OfficialSocials from "@/components/sections/OfficialSocials";
 
 const LatestRelease = dynamic(
   () => import("@/components/sections/LatestRelease")
@@ -39,6 +40,8 @@ export default function Home() {
       <Navbar />
 
       <Hero />
+
+      <OfficialSocials />
 
       <LatestRelease />
 
