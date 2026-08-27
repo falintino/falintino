@@ -4,21 +4,21 @@ export const artist = {
   tagline: "Creator • Music Artist",
 
   description:
-  "Falintino adalah kreator digital asal Kalimantan Barat yang dikenal melalui konten gaming dan dunia digital. Setelah membangun jutaan penonton di berbagai platform, Falintino memperluas perjalanan kreatifnya ke industri musik melalui single debut 'Di Balik Layar'. Website ini menjadi pusat resmi untuk mengikuti karya terbaru, perjalanan, dan berbagai aktivitas kreatif Falintino.",
+    "Falintino adalah kreator konten dan musisi asal Kalimantan Barat. Ia dikenal melalui akun TikTok resmi @aprilfullskin dan kanal YouTube 7 April FF, dengan konten yang berfokus pada gaming, khususnya Free Fire.",
 
-  email: "contact@falintino.com",
+  email: "admin@falintino.com",
 
   spotify:
-    "https://open.spotify.com/track/6cshhbyHBsy4CmQqG8tvN8",
+    "https://open.spotify.com/artist/4uAv6DgSzS3d6ESFLdJyji",
 
   tiktok:
-    "https://www.tiktok.com/@falintino",
+    "https://www.tiktok.com/@aprilfullskin",
 
   instagram:
     "https://instagram.com/falintino07",
 
   youtube:
-    "https://youtube.com/",
+    "https://www.youtube.com/channel/UCGry5noC1A-0DxXaKo6igcg",
 
   avatar: "/images/profile.png",
 

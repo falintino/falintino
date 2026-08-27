@@ -8,25 +8,25 @@ import {
 export const socials = [
   {
     name: "Spotify",
-    description: "Listen on Spotify",
-    url: "https://open.spotify.com/artist/",
+    description: "Falintino on Spotify",
+    url: "https://open.spotify.com/artist/4uAv6DgSzS3d6ESFLdJyji",
     icon: FaSpotify,
   },
   {
     name: "YouTube",
-    description: "Watch on YouTube",
-    url: "https://youtube.com/@Falintino",
+    description: "Official YouTube channel: 7 April FF",
+    url: "https://www.youtube.com/channel/UCGry5noC1A-0DxXaKo6igcg",
     icon: FaYoutube,
   },
   {
     name: "TikTok",
-    description: "Follow on TikTok",
-    url: "https://tiktok.com/@falintino",
+    description: "Official TikTok: @aprilfullskin",
+    url: "https://www.tiktok.com/@aprilfullskin",
     icon: FaTiktok,
   },
   {
     name: "Instagram",
-    description: "Follow on Instagram",
+    description: "Official Instagram: @falintino07",
     url: "https://instagram.com/falintino07",
     icon: FaInstagram,
   },

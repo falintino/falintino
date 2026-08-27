@@ -6,12 +6,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 
 const links = [
-  { label: "Home", href: "#home" },
-  { label: "Music", href: "#music" },
-  { label: "About", href: "#about" },
-  { label: "Videos", href: "#videos" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/#home", sectionId: "home" },
+  { label: "Music", href: "/#music", sectionId: "music" },
+  { label: "About", href: "/#about", sectionId: "about" },
+  { label: "Videos", href: "/#videos", sectionId: "videos" },
+  { label: "Gallery", href: "/#gallery", sectionId: "gallery" },
+  { label: "Contact", href: "/#contact", sectionId: "contact" },
+  { label: "Socials", href: "/socials", sectionId: null },
 ];
 
 export default function Navbar() {
@@ -26,13 +27,14 @@ export default function Navbar() {
       let current = "home";
 
       links.forEach((item) => {
-        const id = item.href.replace("#", "");
-        const section = document.getElementById(id);
+        if (!item.sectionId) return;
+
+        const section = document.getElementById(item.sectionId);
 
         if (!section) return;
 
         if (window.scrollY >= section.offsetTop - 120) {
-          current = id;
+          current = item.sectionId;
         }
       });
 
@@ -62,23 +64,17 @@ export default function Navbar() {
         }`}
       >
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-
-          <Link
-            href="/"
-            className="text-2xl font-black tracking-wide"
-          >
+          <Link href="/" className="text-2xl font-black tracking-wide">
             <span className="text-[#1DB954]">F</span>alintino
           </Link>
 
           <nav className="hidden items-center gap-2 lg:flex">
-
             {links.map((item) => {
-
               const isActive =
-                active === item.href.replace("#", "");
+                item.sectionId !== null && active === item.sectionId;
 
               return (
-                <a
+                <Link
                   key={item.href}
                   href={item.href}
                   className={`relative rounded-full px-5 py-2 font-medium transition ${
@@ -99,29 +95,24 @@ export default function Navbar() {
                     />
                   )}
 
-                  <span className="relative z-10">
-                    {item.label}
-                  </span>
-                </a>
+                  <span className="relative z-10">{item.label}</span>
+                </Link>
               );
             })}
-
           </nav>
 
           <button
             onClick={() => setOpen(!open)}
             className="text-3xl lg:hidden"
+            aria-label="Toggle navigation menu"
           >
             {open ? <HiX /> : <HiMenuAlt3 />}
           </button>
-
         </div>
       </motion.header>
 
       <AnimatePresence>
-
         {open && (
-
           <motion.div
             initial={{
               opacity: 0,
@@ -134,28 +125,20 @@ export default function Navbar() {
             }}
             className="fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl lg:hidden"
           >
-
             <div className="flex h-full flex-col items-center justify-center gap-10">
-
               {links.map((item) => (
-
-                <a
+                <Link
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
                   className="text-3xl font-bold transition hover:text-[#1DB954]"
                 >
                   {item.label}
-                </a>
-
+                </Link>
               ))}
-
             </div>
-
           </motion.div>
-
         )}
-
       </AnimatePresence>
     </>
   );

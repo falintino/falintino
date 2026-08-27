@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
@@ -16,28 +16,39 @@ const inter = Inter({
 
 const SITE_URL = "https://www.falintino.com";
 
+export const viewport: Viewport = {
+  themeColor: "#000000",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
   title: {
-    default: "Falintino | Official Artist",
+    default: "Falintino | Official Website",
     template: "%s | Falintino",
   },
 
   description:
-    "Official website of Falintino. Listen to the latest music, watch official videos, explore the gallery, and connect through official social media.",
+    "Official website of Falintino, an Indonesian content creator and music artist. Discover official music, videos, TikTok @aprilfullskin, YouTube 7 April FF, Instagram, Spotify, and more.",
 
   keywords: [
     "Falintino",
     "Falintino Official",
+    "Falintino Content Creator",
     "Falintino Music",
     "Falintino Spotify",
+    "Falintino TikTok",
+    "aprilfullskin",
+    "@aprilfullskin",
+    "7 April FF",
     "Falintino YouTube",
-    "Musician Indonesia",
-    "Music Artist",
-    "Spotify",
+    "Falintino Instagram",
+    "Content Creator Indonesia",
+    "Music Artist Indonesia",
+    "Free Fire Creator",
     "TikTok",
     "YouTube",
+    "Spotify",
   ],
 
   authors: [
@@ -48,10 +59,7 @@ export const metadata: Metadata = {
   ],
 
   creator: "Falintino",
-
   publisher: "Falintino",
-
-  category: "music",
 
   alternates: {
     canonical: SITE_URL,
@@ -63,17 +71,17 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: "Falintino",
 
-    title: "Falintino | Official Artist",
+    title: "Falintino | Official Website",
 
     description:
-      "Listen to the latest music, watch official videos, explore the gallery, and stay connected with Falintino.",
+      "Official website of Falintino, Indonesian content creator and music artist known through TikTok @aprilfullskin and YouTube 7 April FF.",
 
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Falintino Official",
+        alt: "Falintino Official Website",
       },
     ],
   },
@@ -81,9 +89,10 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
 
-    title: "Falintino | Official Artist",
+    title: "Falintino | Official Website",
 
-    description: "Official website of Falintino.",
+    description:
+      "Official website of Falintino, Indonesian content creator and music artist.",
 
     images: ["/og-image.jpg"],
   },
@@ -103,14 +112,28 @@ export const metadata: Metadata = {
 
   icons: {
     icon: [
-      { url: "/favicon.ico" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      {
+        url: "/favicon.ico",
+      },
+      {
+        url: "/favicon-32x32.png",
+        sizes: "32x32",
+        type: "image/png",
+      },
+      {
+        url: "/favicon-16x16.png",
+        sizes: "16x16",
+        type: "image/png",
+      },
     ],
+
     apple: "/apple-touch-icon.png",
   },
 
-  themeColor: "#000000",
+  other: {
+    "facebook-domain-verification":
+      "xrisuxgu1ibp34vox4f3q1vvatx104",
+  },
 };
 
 export default function RootLayout({
@@ -130,9 +153,9 @@ export default function RootLayout({
         <StructuredData />
 
         {children}
-      </body>
 
-      <GoogleAnalytics gaId="G-CY3QT7LVSC" />
+        <GoogleAnalytics gaId="G-CY3QT7LVSC" />
+      </body>
     </html>
   );
 }
