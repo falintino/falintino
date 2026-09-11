@@ -1,7 +1,4 @@
 export const press = [
-  // ==========================
-  // MUSIC
-  // ==========================
   {
     category: "music",
     media: "Detik",
@@ -10,17 +7,20 @@ export const press = [
     date: "15 Juli 2026",
   },
 
-  // ==========================
-  // CREATOR JOURNEY
-  // ==========================
+  {
+    category: "creator",
+    media: "Medcom.id",
+    title: "Profil dan Perjalanan Karier Falintino, Melejit Berkat Free Fire",
+    url: "https://www.medcom.id/hiburan/montase/4ba18d0b-profil-dan-perjalanan-karier-falintino-melejit-berkat-free-fire",
+    date: "7 September 2026",
+  },
   {
     category: "creator",
     media: "Liputan6",
     title: "Bangganya Falintino Raih Silver Play Button dari YouTube",
     url: "https://www.liputan6.com/showbiz/read/7893513/bangganya-falintino-raih-silver-play-button-dari-youtube-tepis-stigma-main-game-tak-bermanfaat",
-    date: "2026",
+    date: "18 Juni 2026",
   },
-
   {
     category: "creator",
     media: "RRI",
@@ -28,15 +28,34 @@ export const press = [
     url: "https://rri.co.id/jakarta/ekonomi/umkm/2508921/kreator-asal-kalimantan-barat-nilai-ekonomi-digital-peluang-baru-bagi-anak-muda",
     date: "2026",
   },
-
   {
     category: "creator",
     media: "Metro TV",
     title: "Teknologi Digital Jadi Solusi Anak Muda Daerah Tanpa Merantau",
     url: "https://www.metrotvnews.com/read/bVDCP1BJ-teknologi-digital-jadi-solusi-anak-muda-daerah-tanpa-merantau",
-    date: "2026",
+    date: "26 Juni 2026",
   },
-
+  {
+    category: "creator",
+    media: "tvOne",
+    title: "Dulu Dianggap Sekadar Hobi, Kini Jadi Sumber Penghasilan",
+    url: "https://www.tvonenews.com/daerah/regional/449156-dulu-dianggap-sekadar-hobi-kini-jadi-sumber-penghasilan-perubahan-cara-pandang-terhadap-dunia-game",
+    date: "24 Juni 2026",
+  },
+  {
+    category: "creator",
+    media: "iNews",
+    title: "Kreator Konten Jadi Profesi yang Dikejar Anak Muda",
+    url: "https://www.inews.id/techno/internet/bukan-sekadar-main-game-atau-medsos-kreator-konten-jadi-profesi-dikejar-anak-muda",
+    date: "25 Juni 2026",
+  },
+  {
+    category: "creator",
+    media: "Media Indonesia",
+    title: "Industri Game dan Konten Digital Buka Peluang Ekonomi Baru",
+    url: "https://mediaindonesia.com/nusantara/904188/industri-game-dan-konten-digital-buka-peluang-ekonomi-baru-bagi-generasi-muda",
+    date: "25 Juni 2026",
+  },
   {
     category: "creator",
     media: "VIVA",
@@ -44,7 +63,6 @@ export const press = [
     url: "https://techno.viva.co.id/platform/30678-gagal-jadi-polisi-pemuda-kalbar-ini-kini-raup-cuan-dari-dunia-digital",
     date: "2026",
   },
-
   {
     category: "creator",
     media: "Republika",
