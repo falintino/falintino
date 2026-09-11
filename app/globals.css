@@ -1,163 +1,52 @@
 @import "tailwindcss";
 
-/* ===========================
-   DESIGN SYSTEM
-=========================== */
-
 :root {
-  --background: #050505;
-  --foreground: #ffffff;
-
+  --background: #050807;
+  --foreground: #f7faf8;
   --primary: #1db954;
-
-  --card: rgba(24, 24, 27, 0.55);
-
-  --border: rgba(255, 255, 255, 0.08);
-
-  --radius: 32px;
-
-  --shadow:
-    0 0 70px rgba(29, 185, 84, 0.15);
+  --primary-bright: #53dc83;
+  --card: rgba(255, 255, 255, 0.04);
+  --border: rgba(255, 255, 255, 0.10);
+  --radius: 28px;
+  --shadow: 0 30px 90px rgba(0, 0, 0, 0.38);
 }
 
-/* ===========================
-   BASE
-=========================== */
-
-html {
-  scroll-behavior: smooth;
-  background: var(--background);
-}
-
+html { scroll-behavior: smooth; background: var(--background); scroll-padding-top: 96px; }
 body {
   margin: 0;
   min-height: 100vh;
-
-  background: var(--background);
+  background:
+    radial-gradient(circle at 20% 8%, rgba(29,185,84,.075), transparent 30rem),
+    var(--background);
   color: var(--foreground);
-
   overflow-x: hidden;
-
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
+*, *::before, *::after { box-sizing: border-box; }
+::selection { background: var(--primary); color: #020403; }
+section { position: relative; }
+a, button { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--primary-bright); outline-offset: 4px; }
 
-/* ===========================
-   GLOBAL
-=========================== */
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-::selection {
-  background: var(--primary);
-  color: black;
-}
-
-/*
-  IMPORTANT:
-  Jangan beri padding global ke semua section.
-
-  Setiap section sekarang mengatur padding
-  masing-masing melalui Tailwind.
-*/
-section {
-  position: relative;
-}
-
-/* ===========================
-   SCROLLBAR
-=========================== */
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #090909;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #1db954;
-  border-radius: 999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #24d463;
-}
-
-/* ===========================
-   GLASS
-=========================== */
+::-webkit-scrollbar { width: 9px; }
+::-webkit-scrollbar-track { background: #050807; }
+::-webkit-scrollbar-thumb { background: #1b7d3d; border: 2px solid #050807; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 
 .glass {
-  background: rgba(255, 255, 255, 0.04);
-
+  background: rgba(255,255,255,.04);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border);
 }
-
-/* ===========================
-   GLOW
-=========================== */
-
-.green-glow {
-  box-shadow: 0 0 80px rgba(29, 185, 84, 0.22);
-}
-
-/* ===========================
-   CONTAINER
-=========================== */
-
-.container-padding {
-  padding-left: 24px;
-  padding-right: 24px;
-}
-
-/* ===========================
-   OPTIONAL ANIMATION
-=========================== */
-
-.fade-up {
-  animation: fadeUp 0.8s ease forwards;
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(35px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ===========================
-   IMAGE
-=========================== */
-
-img {
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
-/* ===========================
-   BUTTON / LINK
-=========================== */
-
-button,
-a {
-  transition:
-    color 0.3s ease,
-    background-color 0.3s ease,
-    border-color 0.3s ease,
-    opacity 0.3s ease,
-    transform 0.3s ease;
+.green-glow { box-shadow: 0 0 80px rgba(29,185,84,.18); }
+.container-padding { padding-left: 24px; padding-right: 24px; }
+.fade-up { animation: fadeUp .8s ease forwards; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+img { user-select: none; -webkit-user-drag: none; }
+button, a { transition: color .25s ease, background-color .25s ease, border-color .25s ease, opacity .25s ease, transform .25s ease; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
