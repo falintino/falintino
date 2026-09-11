@@ -1,131 +1,51 @@
 "use client";
 
-import { FaEnvelope, FaArrowRight } from "react-icons/fa";
+import { FaEnvelope, FaArrowRight, FaCheck, FaInstagram, FaSpotify, FaTiktok, FaYoutube } from "react-icons/fa";
 import { motion } from "framer-motion";
-
 import Container from "../ui/Container";
-import SectionTitle from "../ui/SectionTitle";
-
 import { artist } from "@/data/artist";
-import { socials } from "@/data/socials";
 
-const accountDescriptions: Record<string, string> = {
-  Spotify: "Falintino on Spotify",
-  YouTube: "Official YouTube: @aprilfullskin (7 April FF)",
-  TikTok: "Official TikTok: @aprilfullskin (Falintino)",
-  Instagram: "Official Instagram: @falintino07 (Falintino)",
-};
+const opportunities = ["Kolaborasi musik", "Kampanye & endorsement", "Media dan wawancara", "Kerja sama bisnis"];
+const profiles = [
+  { name: "TikTok", handle: "@aprilfullskin", url: artist.tiktok, icon: FaTiktok },
+  { name: "YouTube", handle: "7 April FF", url: artist.youtube, icon: FaYoutube },
+  { name: "Instagram", handle: "@falintino07", url: artist.instagram, icon: FaInstagram },
+  { name: "Spotify", handle: "Falintino", url: artist.spotify, icon: FaSpotify },
+];
 
 export default function Contact() {
   return (
-    <section
-      id="contact"
-      className="relative overflow-hidden py-32"
-    >
-      <div className="absolute left-0 top-0 h-[500px] w-[500px] rounded-full bg-[#1DB954]/10 blur-[180px]" />
-
+    <section id="contact" className="relative overflow-hidden border-t border-white/[0.06] py-24 sm:py-32">
+      <div className="pointer-events-none absolute right-0 top-0 h-[520px] w-[520px] rounded-full bg-[#1DB954]/10 blur-[180px]" />
       <Container>
-        <SectionTitle
-          subtitle="CONTACT"
-          title="Let's Connect"
-        />
+        <div className="grid overflow-hidden rounded-[36px] border border-white/10 bg-white/[0.035] lg:grid-cols-[1.1fr_.9fr]">
+          <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-7 sm:p-10 lg:p-14">
+            <p className="text-sm font-extrabold uppercase tracking-[0.25em] text-[#53dc83]">Kontak Profesional</p>
+            <h2 className="mt-5 max-w-xl text-4xl font-black leading-tight tracking-tight sm:text-5xl">Mari menciptakan sesuatu yang berdampak.</h2>
+            <p className="mt-6 max-w-xl text-base leading-8 text-zinc-400">Untuk kebutuhan kerja sama, publikasi, kampanye, atau pertanyaan profesional, silakan hubungi melalui email resmi berikut.</p>
 
-        <div className="mt-16 grid gap-16 lg:grid-cols-2">
-
-          {/* LEFT */}
-
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-5xl font-black leading-tight">
-              Ready For
-              <br />
-              Collaboration.
-            </h2>
-
-            <p className="mt-8 max-w-lg leading-8 text-zinc-400">
-              Open for music collaboration,
-              commercial campaign,
-              endorsement,
-              live streaming,
-              brand partnership,
-              and business inquiries.
-            </p>
-
-            <a
-              href={`mailto:${artist.email}`}
-              className="mt-10 inline-flex items-center gap-4 rounded-full bg-[#1DB954] px-8 py-4 font-bold text-black transition hover:scale-105"
-            >
-              <FaEnvelope />
-              {artist.email}
-            </a>
-
-            <div className="mt-10 rounded-[32px] border border-white/10 bg-white/[0.03] p-7 backdrop-blur-xl">
-              <p className="text-sm tracking-[5px] text-[#1DB954]">
-                RESPONSE
-              </p>
-
-              <h3 className="mt-3 text-3xl font-black">
-                Within 24 Hours
-              </h3>
-
-              <p className="mt-4 leading-7 text-zinc-400">
-                Every collaboration request will be reviewed as quickly as
-                possible.
-              </p>
+            <div className="mt-8 grid gap-3 sm:grid-cols-2">
+              {opportunities.map((item) => <div key={item} className="flex items-center gap-3 text-sm font-semibold text-zinc-300"><span className="grid h-6 w-6 place-items-center rounded-full bg-[#1DB954]/15 text-[#53dc83]"><FaCheck className="text-[10px]" /></span>{item}</div>)}
             </div>
+
+            <a href={`mailto:${artist.email}?subject=Business%20Inquiry%20-%20Falintino`} className="mt-10 inline-flex max-w-full items-center gap-3 rounded-full bg-[#1DB954] px-7 py-4 font-extrabold text-black hover:-translate-y-1 hover:bg-[#2bd567]">
+              <FaEnvelope /><span className="truncate">{artist.email}</span><FaArrowRight className="shrink-0" />
+            </a>
+            <p className="mt-4 text-xs leading-6 text-zinc-500">Gunakan subjek dan informasi kerja sama yang jelas agar permintaan dapat ditinjau dengan tepat.</p>
           </motion.div>
 
-          {/* RIGHT */}
-
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-5"
-          >
-            {socials.map((item) => {
-              const Icon = item.icon;
-
-              const description =
-                accountDescriptions[item.name] ?? item.description;
-
-              return (
-                <a
-                  key={item.name}
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-between rounded-[28px] border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-[#1DB954]"
-                >
-                  <div className="flex items-center gap-5">
-
-                    <div className="rounded-2xl bg-white/5 p-4 text-2xl text-[#1DB954]">
-                      <Icon />
-                    </div>
-
-                    <div>
-                      <h3 className="text-xl font-bold">
-                        {item.name}
-                      </h3>
-
-                      <p className="mt-1 text-sm text-zinc-500">
-                        {description}
-                      </p>
-                    </div>
-
-                  </div>
-
-                  <FaArrowRight className="transition group-hover:translate-x-2 group-hover:text-[#1DB954]" />
-                </a>
-              );
-            })}
-          </motion.div>
-
+          <div className="border-t border-white/10 bg-black/20 p-7 sm:p-10 lg:border-l lg:border-t-0 lg:p-14">
+            <p className="text-sm font-extrabold uppercase tracking-[0.22em] text-zinc-500">Akun Terverifikasi</p>
+            <div className="mt-6 space-y-3">
+              {profiles.map((item) => {
+                const Icon = item.icon;
+                return <a key={item.name} href={item.url} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.035] p-4 hover:-translate-y-0.5 hover:border-[#1DB954]/50 hover:bg-[#1DB954]/[0.06]">
+                  <div className="flex min-w-0 items-center gap-4"><span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-white/[0.06] text-lg text-[#53dc83]"><Icon /></span><span className="min-w-0"><strong className="block">{item.name}</strong><span className="block truncate text-sm text-zinc-500">{item.handle}</span></span></div>
+                  <FaArrowRight className="shrink-0 text-zinc-600 transition group-hover:translate-x-1 group-hover:text-[#53dc83]" />
+                </a>;
+              })}
+            </div>
+          </div>
         </div>
       </Container>
     </section>
