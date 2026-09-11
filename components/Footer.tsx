@@ -1,230 +1,56 @@
 import Link from "next/link";
-import {
-  FaInstagram,
-  FaSpotify,
-  FaTiktok,
-  FaYoutube,
-} from "react-icons/fa";
+import { FaInstagram, FaSpotify, FaTiktok, FaYoutube, FaEnvelope } from "react-icons/fa";
+import { artist } from "@/data/artist";
 
 const socialLinks = [
-  {
-    name: "Spotify",
-    href: "https://open.spotify.com/artist/4uAv6DgSzS3d6ESFLdJyji",
-    icon: FaSpotify,
-  },
-  {
-    name: "YouTube",
-    href: "https://www.youtube.com/channel/UCGry5noC1A-0DxXaKo6igcg",
-    icon: FaYoutube,
-  },
-  {
-    name: "TikTok",
-    href: "https://www.tiktok.com/@aprilfullskin",
-    icon: FaTiktok,
-  },
-  {
-    name: "Instagram",
-    href: "https://www.instagram.com/falintino07",
-    icon: FaInstagram,
-  },
+  { name: "Spotify", href: artist.spotify, icon: FaSpotify },
+  { name: "YouTube", href: artist.youtube, icon: FaYoutube },
+  { name: "TikTok", href: artist.tiktok, icon: FaTiktok },
+  { name: "Instagram", href: artist.instagram, icon: FaInstagram },
+];
+
+const nav = [
+  ["Beranda", "/#home"], ["Musik", "/#music"], ["Tentang", "/#about"],
+  ["Video", "/#videos"], ["Galeri", "/#gallery"], ["Media", "/#press"],
 ];
 
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative mt-24 border-t border-white/10 bg-black">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,#1DB95410,transparent_60%)]"
-      />
-
-      <div className="relative mx-auto max-w-7xl px-6 py-20">
-        <div className="grid gap-14 lg:grid-cols-3">
-
-          {/* BRAND */}
+    <footer className="relative border-t border-white/10 bg-[#030504]">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(29,185,84,.08),transparent_38%)]" />
+      <div className="relative mx-auto max-w-7xl px-6 py-16 sm:py-20">
+        <div className="grid gap-12 lg:grid-cols-[1.2fr_.8fr_.9fr]">
           <div>
-            <Link
-              href="/"
-              className="inline-block text-4xl font-black"
-              aria-label="Falintino Official Website"
-            >
-              <span className="text-[#1DB954]">F</span>ALINTINO
+            <Link href="/#home" className="inline-flex items-center gap-3" aria-label="Falintino — beranda">
+              <span className="grid h-12 w-12 place-items-center rounded-2xl border border-[#1DB954]/30 bg-[#1DB954]/10 text-2xl font-black text-[#1DB954]">F</span>
+              <span className="text-2xl font-black tracking-tight">FALINTINO</span>
             </Link>
-
-            <p className="mt-6 max-w-sm leading-8 text-zinc-400">
-              Official website of Falintino, content creator and music artist.
-              Discover official music, videos, social media accounts, and
-              digital profiles.
-            </p>
-
-            <Link
-              href="/socials"
-              className="mt-6 inline-flex items-center rounded-full border border-[#1DB954]/30 bg-[#1DB954]/10 px-5 py-2.5 text-sm font-semibold text-[#1DB954] transition hover:bg-[#1DB954] hover:text-black"
-            >
-              Official Social Media →
-            </Link>
+            <p className="mt-6 max-w-md text-base leading-8 text-zinc-400">Situs resmi Falintino, kreator konten dan artis musik Indonesia. Temukan karya, kanal resmi, liputan media, dan informasi kerja sama.</p>
+            <div className="mt-7 flex gap-3">
+              {socialLinks.map(({ name, href, icon: Icon }) => <a key={name} href={href} target="_blank" rel="noopener noreferrer" aria-label={`Falintino di ${name}`} className="grid h-11 w-11 place-items-center rounded-full border border-white/10 bg-white/[0.03] text-zinc-300 hover:-translate-y-1 hover:border-[#1DB954] hover:bg-[#1DB954] hover:text-black"><Icon /></a>)}
+            </div>
           </div>
 
-          {/* NAVIGATION */}
           <div>
-            <h3 className="mb-6 text-xl font-bold">
-              Navigation
-            </h3>
-
-            <nav
-              aria-label="Footer navigation"
-              className="flex flex-col gap-4"
-            >
-              <Link
-                href="/#home"
-                className="text-zinc-400 hover:text-[#1DB954]"
-              >
-                Home
-              </Link>
-
-              <Link
-                href="/music"
-                className="text-zinc-400 hover:text-[#1DB954]"
-              >
-                Music
-              </Link>
-
-              <Link
-                href="/about"
-                className="text-zinc-400 hover:text-[#1DB954]"
-              >
-                About
-              </Link>
-
-              <Link
-                href="/#videos"
-                className="text-zinc-400 hover:text-[#1DB954]"
-              >
-                Videos
-              </Link>
-
-              <Link
-                href="/#gallery"
-                className="text-zinc-400 hover:text-[#1DB954]"
-              >
-                Gallery
-              </Link>
-
-              <Link
-                href="/#contact"
-                className="text-zinc-400 hover:text-[#1DB954]"
-              >
-                Contact
-              </Link>
-
-              <Link
-                href="/socials"
-                className="font-medium text-[#1DB954] hover:text-[#24d463]"
-              >
-                Official Social Media
-              </Link>
+            <h3 className="text-sm font-extrabold uppercase tracking-[0.22em] text-zinc-500">Jelajahi</h3>
+            <nav className="mt-6 grid grid-cols-2 gap-x-6 gap-y-4" aria-label="Navigasi footer">
+              {nav.map(([label, href]) => <Link key={href} href={href} className="font-semibold text-zinc-300 hover:text-[#53dc83]">{label}</Link>)}
             </nav>
           </div>
 
-          {/* SOCIAL MEDIA */}
           <div>
-            <h3 className="mb-3 text-xl font-bold">
-              Official Accounts
-            </h3>
-
-            <p className="mb-6 max-w-sm text-sm leading-6 text-zinc-500">
-              Connect with Falintino through official digital profiles.
-            </p>
-
-            <div className="flex flex-wrap gap-4">
-              {socialLinks.map((social) => {
-                const Icon = social.icon;
-
-                return (
-                  <a
-                    key={social.name}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Falintino on ${social.name}`}
-                    title={`Falintino on ${social.name}`}
-                    className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 transition hover:-translate-y-1 hover:border-[#1DB954] hover:bg-[#1DB954] hover:text-black"
-                  >
-                    <Icon size={20} />
-                  </a>
-                );
-              })}
-            </div>
-
-            <div className="mt-7 space-y-2 text-sm text-zinc-500">
-              <p>
-                TikTok:{" "}
-                <a
-                  href="https://www.tiktok.com/@aprilfullskin"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium text-zinc-300 hover:text-[#1DB954]"
-                >
-                  @aprilfullskin (Falintino)
-                </a>
-              </p>
-
-              <p>
-                YouTube:{" "}
-                <a
-                  href="https://www.youtube.com/channel/UCGry5noC1A-0DxXaKo6igcg"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium text-zinc-300 hover:text-[#1DB954]"
-                >
-                  @aprilfullskin (7 April FF)
-                </a>
-              </p>
-
-              <p>
-                Instagram:{" "}
-                <a
-                  href="https://www.instagram.com/falintino07"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium text-zinc-300 hover:text-[#1DB954]"
-                >
-                  @falintino07 (Falintino)
-                </a>
-              </p>
-
-              <p>
-                Spotify:{" "}
-                <a
-                  href="https://open.spotify.com/artist/4uAv6DgSzS3d6ESFLdJyji"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium text-zinc-300 hover:text-[#1DB954]"
-                >
-                  Falintino
-                </a>
-              </p>
-            </div>
+            <h3 className="text-sm font-extrabold uppercase tracking-[0.22em] text-zinc-500">Kontak Resmi</h3>
+            <a href={`mailto:${artist.email}`} className="mt-6 flex items-center gap-3 break-all text-lg font-bold text-white hover:text-[#53dc83]"><FaEnvelope className="shrink-0 text-[#1DB954]" />{artist.email}</a>
+            <p className="mt-4 text-sm leading-7 text-zinc-500">Untuk kerja sama, kampanye, publikasi media, dan pertanyaan bisnis.</p>
+            <Link href="/socials" className="mt-5 inline-flex text-sm font-bold text-[#53dc83] hover:text-white">Lihat semua akun resmi →</Link>
           </div>
         </div>
 
-        <div className="mt-16 border-t border-white/10 pt-8">
-          <div className="flex flex-col items-center justify-between gap-4 text-center text-sm text-zinc-500 sm:flex-row sm:text-left">
-            <p>
-              © {year} Falintino. All Rights Reserved.
-            </p>
-
-            <p>
-              Official Website:{" "}
-              <Link
-                href="/"
-                className="font-medium text-zinc-300 hover:text-[#1DB954]"
-              >
-                falintino.com
-              </Link>
-            </p>
-          </div>
+        <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-7 text-sm text-zinc-500 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {year} Falintino. Hak cipta dilindungi.</p>
+          <p>Situs resmi · falintino.com</p>
         </div>
       </div>
     </footer>
