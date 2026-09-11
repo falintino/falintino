@@ -4,15 +4,14 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
+import { FaArrowRight } from "react-icons/fa";
 
 const links = [
-  { label: "Home", href: "/#home", sectionId: "home" },
-  { label: "Music", href: "/music", sectionId: null },
-  { label: "About", href: "/about", sectionId: null },
-  { label: "Videos", href: "/#videos", sectionId: "videos" },
-  { label: "Gallery", href: "/#gallery", sectionId: "gallery" },
-  { label: "Contact", href: "/#contact", sectionId: "contact" },
-  { label: "Socials", href: "/socials", sectionId: null },
+  { label: "Beranda", href: "/#home", sectionId: "home" },
+  { label: "Musik", href: "/#music", sectionId: "music" },
+  { label: "Tentang", href: "/#about", sectionId: "about" },
+  { label: "Video", href: "/#videos", sectionId: "videos" },
+  { label: "Media", href: "/#press", sectionId: "press" },
 ];
 
 export default function Navbar() {
@@ -22,96 +21,60 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 30);
-
+      setScrolled(window.scrollY > 24);
       let current = "home";
-
       links.forEach((item) => {
-        if (!item.sectionId) return;
-
         const section = document.getElementById(item.sectionId);
-
-        if (!section) return;
-
-        if (window.scrollY >= section.offsetTop - 120) {
-          current = item.sectionId;
-        }
+        if (section && window.scrollY >= section.offsetTop - 160) current = item.sectionId;
       });
-
       setActive(current);
     };
 
-    window.addEventListener("scroll", onScroll);
-
+    window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
-
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
 
   return (
     <>
       <motion.header
-        initial={{
-          y: -80,
-        }}
-        animate={{
-          y: 0,
-        }}
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "border-b border-white/10 bg-black/70 backdrop-blur-2xl"
-            : "bg-transparent"
-        }`}
+        initial={{ y: -80 }}
+        animate={{ y: 0 }}
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? "border-b border-white/10 bg-[#050807]/85 shadow-2xl shadow-black/20 backdrop-blur-2xl" : "bg-gradient-to-b from-black/70 to-transparent"}`}
       >
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-          <Link
-            href="/"
-            className="text-2xl font-black tracking-wide"
-            aria-label="Falintino Official Website"
-          >
-            <span className="text-[#1DB954]">F</span>alintino
+        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-6">
+          <Link href="/#home" className="flex items-center gap-3" aria-label="Falintino — halaman utama">
+            <span className="grid h-10 w-10 place-items-center rounded-2xl border border-[#1DB954]/30 bg-[#1DB954]/10 text-xl font-black text-[#1DB954]">F</span>
+            <span>
+              <span className="block text-lg font-black tracking-tight">FALINTINO</span>
+              <span className="block text-[10px] font-semibold uppercase tracking-[0.24em] text-zinc-500">Official website</span>
+            </span>
           </Link>
 
-          <nav className="hidden items-center gap-2 lg:flex">
+          <nav className="hidden items-center gap-1 lg:flex" aria-label="Navigasi utama">
             {links.map((item) => {
-              const isActive =
-                item.sectionId !== null && active === item.sectionId;
-
+              const isActive = active === item.sectionId;
               return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`relative rounded-full px-5 py-2 font-medium transition ${
-                    isActive
-                      ? "text-white"
-                      : "text-zinc-400 hover:text-white"
-                  }`}
-                >
-                  {isActive && (
-                    <motion.span
-                      layoutId="navbar-active"
-                      className="absolute inset-0 rounded-full bg-white/10"
-                      transition={{
-                        type: "spring",
-                        stiffness: 350,
-                        damping: 30,
-                      }}
-                    />
-                  )}
-
-                  <span className="relative z-10">
-                    {item.label}
-                  </span>
+                <Link key={item.href} href={item.href} className={`relative rounded-full px-4 py-2 text-sm font-semibold ${isActive ? "text-white" : "text-zinc-400 hover:text-white"}`}>
+                  {isActive && <motion.span layoutId="navbar-active" className="absolute inset-0 rounded-full border border-white/10 bg-white/[0.06]" />}
+                  <span className="relative z-10">{item.label}</span>
                 </Link>
               );
             })}
           </nav>
 
-          <button
-            onClick={() => setOpen(!open)}
-            className="text-3xl lg:hidden"
-            aria-label="Toggle navigation menu"
-          >
+          <div className="hidden lg:block">
+            <Link href="/#contact" className="inline-flex items-center gap-2 rounded-full bg-[#1DB954] px-5 py-2.5 text-sm font-extrabold text-black hover:-translate-y-0.5 hover:bg-[#29d565]">
+              Hubungi <FaArrowRight className="text-xs" />
+            </Link>
+          </div>
+
+          <button onClick={() => setOpen(!open)} className="grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-white/[0.04] text-2xl lg:hidden" aria-label={open ? "Tutup menu" : "Buka menu"} aria-expanded={open}>
             {open ? <HiX /> : <HiMenuAlt3 />}
           </button>
         </div>
@@ -119,30 +82,17 @@ export default function Navbar() {
 
       <AnimatePresence>
         {open && (
-          <motion.div
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            exit={{
-              opacity: 0,
-            }}
-            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl lg:hidden"
-          >
-            <div className="flex h-full flex-col items-center justify-center gap-10">
-              {links.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="text-3xl font-bold transition hover:text-[#1DB954]"
-                >
-                  {item.label}
-                </Link>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-40 bg-[#050807]/98 px-6 pt-28 backdrop-blur-2xl lg:hidden">
+            <nav className="mx-auto flex max-w-lg flex-col" aria-label="Navigasi seluler">
+              {links.map((item, index) => (
+                <motion.div key={item.href} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.05 }}>
+                  <Link href={item.href} onClick={() => setOpen(false)} className="flex items-center justify-between border-b border-white/10 py-5 text-2xl font-bold">
+                    {item.label}<span className="text-[#1DB954]">↗</span>
+                  </Link>
+                </motion.div>
               ))}
-            </div>
+              <Link href="/#contact" onClick={() => setOpen(false)} className="mt-8 rounded-2xl bg-[#1DB954] px-6 py-4 text-center font-extrabold text-black">Kerja Sama & Kontak</Link>
+            </nav>
           </motion.div>
         )}
       </AnimatePresence>
