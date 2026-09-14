@@ -8,7 +8,7 @@ import { artist } from "@/data/artist";
 const opportunities = ["Kolaborasi musik", "Kampanye & endorsement", "Media dan wawancara", "Kerja sama bisnis"];
 const profiles = [
   { name: "TikTok", handle: "Falintino · @aprilfullskin", url: artist.tiktok, icon: FaTiktok },
-  { name: "YouTube", handle: "7 April FF · Falintino", url: artist.youtube, icon: FaYoutube },
+  { name: "YouTube", handle: "7 April FF · @aprilfullskin", url: artist.youtube, icon: FaYoutube },
   { name: "Instagram", handle: "Falintino · @falintino07", url: artist.instagram, icon: FaInstagram },
   { name: "Spotify", handle: "Falintino", url: artist.spotify, icon: FaSpotify },
 ];
