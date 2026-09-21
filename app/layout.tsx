@@ -113,7 +113,7 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/images/artist/profile.jpeg",
+        url: "/images/artist/favicon-profile.jpg",
         type: "image/jpeg",
       },
     ],
