@@ -113,9 +113,8 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/falintino-favicon.png",
-        sizes: "512x512",
-        type: "image/png",
+        url: "/icon.svg",
+        type: "image/svg+xml",
       },
     ],
 
