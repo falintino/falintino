@@ -20,8 +20,8 @@ export const socials = [
   },
   {
     name: "TikTok",
-    description: "Official TikTok: @aprilfullskin",
-    url: "https://www.tiktok.com/@aprilfullskin",
+    description: "Official TikTok: @falintino_",
+    url: "https://www.tiktok.com/@falintino_",
     icon: FaTiktok,
   },
   {
