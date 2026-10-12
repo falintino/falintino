@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: "Falintino Social Media | Official Accounts",
 
   description:
-    "Official social media accounts of Falintino, including TikTok @aprilfullskin, YouTube 7 April FF, Instagram @falintino07, and Spotify.",
+    "Official social media accounts of Falintino, including TikTok @falintino_, YouTube 7 April FF, Instagram @falintino07, and Spotify.",
 
   alternates: {
     canonical: "https://www.falintino.com/socials",
@@ -37,9 +37,9 @@ export const metadata: Metadata = {
 const socialProfiles = [
   {
     name: "TikTok",
-    handle: "@aprilfullskin",
+    handle: "@falintino_",
     description: "Official TikTok account of Falintino",
-    href: "https://www.tiktok.com/@aprilfullskin",
+    href: "https://www.tiktok.com/@falintino_",
     image: "/images/socials/tiktok.jpg",
     icon: FaTiktok,
   },
@@ -88,7 +88,7 @@ const profilePageSchema = {
     name: "Falintino",
 
     alternateName: [
-      "@aprilfullskin",
+      "@falintino_",
       "7 April FF",
     ],
 
@@ -102,7 +102,7 @@ const profilePageSchema = {
     ],
 
     sameAs: [
-      "https://www.tiktok.com/@aprilfullskin",
+      "https://www.tiktok.com/@falintino_",
       "https://www.youtube.com/channel/UCGry5noC1A-0DxXaKo6igcg",
       "https://www.instagram.com/falintino07",
       "https://open.spotify.com/artist/4uAv6DgSzS3d6ESFLdJyji",
