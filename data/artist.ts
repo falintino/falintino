@@ -4,7 +4,7 @@ export const artist = {
   tagline: "Creator • Music Artist",
 
   description:
-    "Falintino adalah kreator konten dan musisi asal Kalimantan Barat. Ia dikenal melalui akun TikTok resmi @falintino_ (Falintino) dan kanal YouTube @falintino_ (7 April FF), dengan konten yang berfokus pada gaming, khususnya Free Fire.",
+    "Falintino adalah kreator konten dan musisi asal Kalimantan Barat. Ia dikenal melalui akun TikTok resmi @falintino_ (Falintino) dan kanal YouTube @aprilfullskin (7 April FF), dengan konten yang berfokus pada gaming, khususnya Free Fire.",
 
   email: "admin@falintino.com",
 
