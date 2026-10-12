@@ -10,8 +10,8 @@ import {
 const socialProfiles = [
   {
     name: "TikTok",
-    handle: "@aprilfullskin",
-    href: "https://www.tiktok.com/@aprilfullskin",
+    handle: "@falintino_",
+    href: "https://www.tiktok.com/@falintino_",
     image: "/images/socials/tiktok.jpg",
     icon: FaTiktok,
   },
