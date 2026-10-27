@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Instagram, Youtube, Music2, Facebook, Mail, Globe, MessageCircle, Gamepad2, Settings2, Plus, Trash2, X, Save, Link2, Image as ImageIcon, Video } from "lucide-react";
+import { Instagram, Play, Music2, Facebook, Mail, Globe, MessageCircle, Gamepad2, Settings2, Plus, Trash2, X, Save, Link2, Image as ImageIcon, Video } from "lucide-react";
 
 type LinkItem = { id: string; title: string; url: string; group: string; icon: string; subtitle?: string };
 type Profile = { name: string; bio: string; avatar: string; background: string; backgroundType: "image" | "video"; links: LinkItem[] };
@@ -16,7 +16,7 @@ const defaults: Profile = {
   {id:"community",title:"Join Saluran WhatsApp",url:"https://whatsapp.com/",group:"KOMUNITAS",icon:"whatsapp"},
   {id:"discord",title:"Gabung Discord",url:"https://discord.com/",group:"KOMUNITAS",icon:"discord"}
  ]};
-const iconMap: Record<string, React.ReactNode> = {instagram:<Instagram/>,youtube:<Youtube/>,tiktok:<Music2/>,facebook:<Facebook/>,mail:<Mail/>,globe:<Globe/>,whatsapp:<MessageCircle/>,game:<Gamepad2/>,community:<MessageCircle/>,discord:<Gamepad2/>,link:<Link2/>};
+const iconMap: Record<string, React.ReactNode> = {instagram:<Instagram/>,youtube:<Play/>,tiktok:<Music2/>,facebook:<Facebook/>,mail:<Mail/>,globe:<Globe/>,whatsapp:<MessageCircle/>,game:<Gamepad2/>,community:<MessageCircle/>,discord:<Gamepad2/>,link:<Link2/>};
 function BrandIcon({type}:{type:string}) { return <>{iconMap[type] || <Link2/>}</>; }
 function loadProfile():Profile { try { const s=localStorage.getItem("falintino-link-profile"); return s?{...defaults,...JSON.parse(s)}:defaults; } catch { return defaults; } }
 export default function Home() {
