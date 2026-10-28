@@ -20,12 +20,12 @@ export default function Home() {
  const pathname = usePathname();
  const isAdmin = pathname === "/admin" || pathname.startsWith("/admin/");
  const [profile,setProfile]=useState<Profile>(defaults),[draft,setDraft]=useState<Profile>(defaults),[editing,setEditing]=useState(false),[tab,setTab]=useState("profile"),[notice,setNotice]=useState("");
- useEffect(()=>{setProfile(loadProfile());},[]);
+ useEffect(()=>{let active=true;(async()=>{try{const response=await fetch("/api/profile",{cache:"no-store"});if(!response.ok)throw new Error("Profil online belum tersedia");const data=await response.json();if(active){const remote={...defaults,...data} as Profile;setProfile(remote);try{localStorage.setItem("falintino-link-profile",JSON.stringify(remote));}catch{}}}catch{if(active)setProfile(loadProfile());}})();return()=>{active=false;}},[]);
  const groups=Array.from(new Set(profile.links.map(x=>x.group.trim()||"LAINNYA")));
  function openEditor(){setDraft(JSON.parse(JSON.stringify(profile)));setEditing(true);}
  function patch<K extends keyof Profile>(key:K,value:Profile[K]){setDraft(p=>({...p,[key]:value}));}
  function patchLink(id:string,key:keyof LinkItem,value:string|boolean){patch("links",draft.links.map(x=>x.id===id?{...x,[key]:value}:x));}
- function save(){setProfile(draft);try{localStorage.setItem("falintino-link-profile",JSON.stringify(draft));setNotice("Perubahan tersimpan di browser ini.");}catch{setNotice("Penyimpanan gagal. Gunakan URL gambar publik.");}setEditing(false);setTimeout(()=>setNotice(""),3000);}
+ async function save(){setNotice("");try{const response=await fetch("/api/profile",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(draft)});const result=await response.json().catch(()=>({}));if(!response.ok)throw new Error(result.error||"Gagal menyimpan ke database.");const saved={...defaults,...(result.profile||draft)} as Profile;setProfile(saved);setDraft(saved);try{localStorage.setItem("falintino-link-profile",JSON.stringify(saved));}catch{}setEditing(false);setNotice("Perubahan berhasil disimpan online.");setTimeout(()=>setNotice(""),3500);}catch(error){setNotice(error instanceof Error?error.message:"Gagal menyimpan. Periksa konfigurasi Supabase.");}}
  function addLink(){patch("links",[...draft.links,{id:crypto.randomUUID(),title:"Link baru",url:"https://",group:"LINK UTAMA",icon:"link",showSocial:false}]);}
  return <main className="site-shell">
   {profile.backgroundType==="video"&&profile.background?<video className="background-media" src={profile.background} autoPlay muted loop playsInline/>:profile.background?<div className="background-media" style={{backgroundImage:`linear-gradient(180deg,rgba(0,7,20,.35),rgba(0,0,0,.92)),url("${profile.background}")`}}/>:null}
