@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { Instagram, Play, Music2, Facebook, Mail, Globe, MessageCircle, Gamepad2, Settings2, Plus, Trash2, X, Save, Link2, Image as ImageIcon, Video } from "lucide-react";
 
 type LinkItem = { id: string; title: string; url: string; group: string; icon: string; subtitle?: string };
@@ -16,6 +17,8 @@ const iconMap: Record<string, React.ReactNode> = {instagram:<Instagram/>,youtube
 function BrandIcon({type}:{type:string}) { return <>{iconMap[type] || <Link2/>}</>; }
 function loadProfile():Profile { try { const s=localStorage.getItem("falintino-link-profile"); if(!s)return defaults; const saved={...defaults,...JSON.parse(s)} as Profile; const generic=new Set(["https://www.youtube.com/","https://youtube.com/","https://wa.me/","https://whatsapp.com/","https://discord.com/","https://facebook.com/","mailto:hyperdarkking@gmail.com"]); saved.links=(saved.links||defaults.links).filter(link=>!generic.has(link.url)); return saved; } catch { return defaults; } }
 export default function Home() {
+ const pathname = usePathname();
+ const isAdmin = pathname === "/admin" || pathname.startsWith("/admin/");
  const [profile,setProfile]=useState<Profile>(defaults),[draft,setDraft]=useState<Profile>(defaults),[editing,setEditing]=useState(false),[tab,setTab]=useState("profile"),[notice,setNotice]=useState("");
  useEffect(()=>{setProfile(loadProfile());},[]);
  const groups=Array.from(new Set(profile.links.map(x=>x.group.trim()||"LAINNYA")));
@@ -27,7 +30,7 @@ export default function Home() {
  return <main className="site-shell">
   {profile.backgroundType==="video"&&profile.background?<video className="background-media" src={profile.background} autoPlay muted loop playsInline/>:profile.background?<div className="background-media" style={{backgroundImage:`linear-gradient(180deg,rgba(0,7,20,.35),rgba(0,0,0,.92)),url("${profile.background}")`}}/>:null}
   <div className="water-texture"/><div className="ambient ambient-one"/><div className="ambient ambient-two"/>
-  <button className="edit-trigger" onClick={openEditor}><Settings2 size={17}/> Edit halaman</button>
+  {isAdmin&&<button className="edit-trigger" onClick={openEditor}><Settings2 size={17}/> Edit halaman</button>}
   <section className="profile-card">
    <div className="top-actions"><span className="sparkle">✳</span><button className="share-button" aria-label="Bagikan" onClick={()=>{navigator.clipboard?.writeText(location.href);setNotice("Alamat halaman siap dibagikan.");setTimeout(()=>setNotice(""),2500);}}>↗</button></div>
    <header className="profile-header"><div className="avatar">{profile.avatar?<img src={profile.avatar} alt={profile.name}/>:<span>F</span>}</div><h1>{profile.name}</h1><p>{profile.bio}</p>
