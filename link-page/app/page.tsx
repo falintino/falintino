@@ -7,18 +7,14 @@ type Profile = { name: string; bio: string; avatar: string; background: string; 
 const defaults: Profile = {
  name:"Falintino", bio:"Creator • Gaming • Music\nSemua link resmi aku ada di sini ✦", avatar:"", background:"", backgroundType:"image",
  links:[
-  {id:"store",title:"Tempat Top Up Game Termurah",url:"https://store.falintino.com",group:"LINK UTAMA",icon:"game"},
-  {id:"artist",title:"Falintino | Official Artist",url:"https://falintino.com",group:"LINK UTAMA",icon:"globe"},
+  {id:"store",title:"Top Up Free Fire",subtitle:"Transaksi otomatis di store resmi",url:"https://store.falintino.com",group:"LINK UTAMA",icon:"game"},
+  {id:"artist",title:"Website Resmi Falintino",subtitle:"Musik, profil, dan karya terbaru",url:"https://falintino.com",group:"LINK UTAMA",icon:"globe"},
   {id:"tiktok",title:"TikTok Falintino",url:"https://www.tiktok.com/@falintino_",group:"MEDIA SOSIAL",icon:"tiktok"},
-  {id:"youtube",title:"YouTube: 7 April FF",url:"https://www.youtube.com/",group:"MEDIA SOSIAL",icon:"youtube"},
-  {id:"instagram",title:"Instagram Falintino",url:"https://www.instagram.com/falintino07/",group:"MEDIA SOSIAL",icon:"instagram"},
-  {id:"whatsapp",title:"WhatsApp aku",url:"https://wa.me/",group:"KOMUNITAS",icon:"whatsapp"},
-  {id:"community",title:"Join Saluran WhatsApp",url:"https://whatsapp.com/",group:"KOMUNITAS",icon:"whatsapp"},
-  {id:"discord",title:"Gabung Discord",url:"https://discord.com/",group:"KOMUNITAS",icon:"discord"}
+  {id:"instagram",title:"Instagram Falintino",url:"https://www.instagram.com/falintino07/",group:"MEDIA SOSIAL",icon:"instagram"}
  ]};
 const iconMap: Record<string, React.ReactNode> = {instagram:<Instagram/>,youtube:<Play/>,tiktok:<Music2/>,facebook:<Facebook/>,mail:<Mail/>,globe:<Globe/>,whatsapp:<MessageCircle/>,game:<Gamepad2/>,community:<MessageCircle/>,discord:<Gamepad2/>,link:<Link2/>};
 function BrandIcon({type}:{type:string}) { return <>{iconMap[type] || <Link2/>}</>; }
-function loadProfile():Profile { try { const s=localStorage.getItem("falintino-link-profile"); return s?{...defaults,...JSON.parse(s)}:defaults; } catch { return defaults; } }
+function loadProfile():Profile { try { const s=localStorage.getItem("falintino-link-profile"); if(!s)return defaults; const saved={...defaults,...JSON.parse(s)} as Profile; const generic=new Set(["https://www.youtube.com/","https://youtube.com/","https://wa.me/","https://whatsapp.com/","https://discord.com/","https://facebook.com/","mailto:hyperdarkking@gmail.com"]); saved.links=(saved.links||defaults.links).filter(link=>!generic.has(link.url)); return saved; } catch { return defaults; } }
 export default function Home() {
  const [profile,setProfile]=useState<Profile>(defaults),[draft,setDraft]=useState<Profile>(defaults),[editing,setEditing]=useState(false),[tab,setTab]=useState("profile"),[notice,setNotice]=useState("");
  useEffect(()=>{setProfile(loadProfile());},[]);
@@ -35,7 +31,7 @@ export default function Home() {
   <section className="profile-card">
    <div className="top-actions"><span className="sparkle">✳</span><button className="share-button" aria-label="Bagikan" onClick={()=>{navigator.clipboard?.writeText(location.href);setNotice("Alamat halaman siap dibagikan.");setTimeout(()=>setNotice(""),2500);}}>↗</button></div>
    <header className="profile-header"><div className="avatar">{profile.avatar?<img src={profile.avatar} alt={profile.name}/>:<span>F</span>}</div><h1>{profile.name}</h1><p>{profile.bio}</p>
-    <div className="social-row">{[["whatsapp","https://wa.me/"],["youtube","https://youtube.com/"],["tiktok","https://tiktok.com/@falintino_"],["instagram","https://instagram.com/falintino07/"],["facebook","https://facebook.com/"],["mail","mailto:hyperdarkking@gmail.com"],["globe","https://falintino.com"]].map(([type,url])=><a key={type} href={url} target="_blank" rel="noreferrer" aria-label={type}><BrandIcon type={type}/></a>)}</div>
+    <div className="social-row">{profile.links.filter(link=>["tiktok","instagram","youtube","facebook","whatsapp","discord","mail","globe"].includes(link.icon)).filter(link=>link.url && !["https://www.youtube.com/","https://youtube.com/","https://wa.me/","https://whatsapp.com/","https://discord.com/","https://facebook.com/"].includes(link.url)).filter((link,index,arr)=>arr.findIndex(item=>item.icon===link.icon)===index).map(link=><a key={link.id} href={link.url} target="_blank" rel="noreferrer" aria-label={link.title} title={link.title}><BrandIcon type={link.icon}/></a>)}</div>
    </header>
    <div className="links-area">{groups.map(group=><section className="link-group" key={group}><h2>{group}</h2>{profile.links.filter(x=>(x.group.trim()||"LAINNYA")===group).map(link=><a className="link-pill" href={link.url} key={link.id} target="_blank" rel="noreferrer"><span className={"link-icon icon-"+link.icon}><BrandIcon type={link.icon}/></span><span className="link-copy"><strong>{link.title}</strong>{link.subtitle&&<small>{link.subtitle}</small>}</span><span className="link-more">⋮</span></a>)}</section>)}</div>
    <footer className="profile-footer"><span>All my links, one place</span><span className="footer-mark">FALINTINO <i>✦</i></span></footer>
