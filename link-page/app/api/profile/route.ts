@@ -19,7 +19,7 @@ function config() {
   const url = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !key) return null;
-  return { url: url.replace(/\\/$/, ""), key };
+  return { url: url.replace(/\/$/, ""), key, legacyKey: process.env.SUPABASE_SERVICE_ROLE_KEY };
 }
 
 async function supabaseRequest(path: string, init?: RequestInit) {
@@ -29,7 +29,7 @@ async function supabaseRequest(path: string, init?: RequestInit) {
     ...init,
     headers: {
       apikey: cfg.key,
-      Authorization: `Bearer ${cfg.key}`,
+      ...(cfg.legacyKey ? { Authorization: `Bearer ${cfg.legacyKey}` } : {}),
       "Content-Type": "application/json",
       ...(init?.headers || {}),
     },
