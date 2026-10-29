@@ -38,13 +38,17 @@ async function supabaseRequest(path: string, init?: RequestInit) {
 }
 
 function toProfile(row: any) {
+  const storedLinks = Array.isArray(row.links) ? row.links : [];
+  const socialConfig = storedLinks.find((item: any) => item && item._profileSocialConfig === true);
   return {
     name: row.name,
     bio: row.bio,
     avatar: row.avatar_url || "",
     background: row.background_url || "",
     backgroundType: row.background_type === "video" ? "video" : "image",
-    links: Array.isArray(row.links) ? row.links : [],
+    links: storedLinks.filter((item: any) => !item || item._profileSocialConfig !== true),
+    socialIcons: Array.isArray(socialConfig?.socialIcons) ? socialConfig.socialIcons : undefined,
+    socialPosition: socialConfig?.socialPosition === "bottom" ? "bottom" : "top",
   };
 }
 
@@ -76,7 +80,7 @@ export async function PUT(request: NextRequest) {
       avatar_url: typeof body.avatar === "string" ? body.avatar.slice(0, 2000) : "",
       background_url: typeof body.background === "string" ? body.background.slice(0, 4000) : "",
       background_type: body.backgroundType === "video" ? "video" : "image",
-      links: body.links.slice(0, 100),
+      links: [...body.links.slice(0, 100), { _profileSocialConfig: true, socialIcons: Array.isArray(body.socialIcons) ? body.socialIcons.slice(0, 50) : [], socialPosition: body.socialPosition === "bottom" ? "bottom" : "top" }],
       updated_at: new Date().toISOString(),
     };
     const response = await supabaseRequest("bio_profile?slug=eq.falintino", {
