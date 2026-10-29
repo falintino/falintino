@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
     if (!(file instanceof File)) {
       return NextResponse.json({ error: "Pilih file terlebih dahulu." }, { status: 400 });
     }
-    if (kind !== "avatar" && kind !== "background" && kind !== "shop") {
+    if (kind !== "avatar" && kind !== "background" && kind !== "shop" && kind !== "icon") {
       return NextResponse.json({ error: "Jenis upload tidak valid." }, { status: 400 });
     }
 
@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
       "video/mp4": "mp4",
     };
     const extension = extensionByType[file.type];
-    const folder = kind === "avatar" ? "avatars" : kind === "shop" ? "products" : "backgrounds";
+    const folder = kind === "avatar" ? "avatars" : kind === "shop" ? "products" : kind === "icon" ? "icons" : "backgrounds";
     const objectPath = `${folder}/${randomUUID()}.${extension}`;
     const bytes = await file.arrayBuffer();
 
