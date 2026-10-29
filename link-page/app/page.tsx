@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Instagram, Play, Music2, Facebook, Mail, Globe, MessageCircle, Gamepad2, Settings2, Plus, Trash2, X, Save, Link2, Image as ImageIcon, Video } from "lucide-react";
 
-type LinkItem = { id: string; title: string; url: string; group: string; icon: string; subtitle?: string; iconUrl?: string; showSocial?: boolean; kind?: "link" | "heading" | "shop"; price?: string; productImage?: string };
+type LinkItem = { id: string; title: string; url: string; group: string; icon: string; subtitle?: string; iconUrl?: string; showSocial?: boolean; kind?: "link" | "heading" | "shop"; price?: string; productImage?: string; productPhotos?: string[]; productCropX?: number; productCropY?: number; description?: string };
 type Profile = { name: string; bio: string; avatar: string; background: string; backgroundType: "image" | "video"; mainHeading: string; socialHeading: string; links: LinkItem[] };
 const defaults: Profile = {
  name:"Falintino", bio:"Creator • Gaming • Music\nSemua link resmi aku ada di sini ✦", avatar:"", background:"", backgroundType:"image", mainHeading:"LINK UTAMA", socialHeading:"MEDIA SOSIAL",
@@ -27,7 +27,7 @@ export default function Home() {
  function patchLink(id:string,key:keyof LinkItem,value:LinkItem[keyof LinkItem]){patch("links",draft.links.map(x=>x.id===id?({...x,[key]:value} as LinkItem):x));}
  async function save(){setNotice("");try{const response=await fetch("/api/profile",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(draft)});const result=await response.json().catch(()=>({}));if(!response.ok)throw new Error(result.error||"Gagal menyimpan ke database.");const saved={...defaults,...(result.profile||draft)} as Profile;setProfile(saved);setDraft(saved);try{localStorage.setItem("falintino-link-profile",JSON.stringify(saved));}catch{}setEditing(false);setNotice("Perubahan berhasil disimpan online.");setTimeout(()=>setNotice(""),3500);}catch(error){setNotice(error instanceof Error?error.message:"Gagal menyimpan. Periksa konfigurasi Supabase.");}}
  function moveLink(id:string,where:"top"|"up"|"down"|"bottom"){const items=[...draft.links];const index=items.findIndex(x=>x.id===id);if(index<0)return;const [item]=items.splice(index,1);const target=where==="top"?0:where==="bottom"?items.length:where==="up"?Math.max(0,index-1):Math.min(items.length,index+1);items.splice(target,0,item);patch("links",items);}
- function addLink(kind:"link"|"heading"|"shop"="link"){patch("links",[...draft.links,{id:crypto.randomUUID(),title:kind==="heading"?"Judul bagian baru":kind==="shop"?"Produk baru":"Link baru",url:kind==="heading"?"":"https://",group:"LINK UTAMA",icon:"link",showSocial:false,kind,price:kind==="shop"?"Rp0":"",productImage:""}]);}
+ function addLink(kind:"link"|"heading"|"shop"="link"){patch("links",[...draft.links,{id:crypto.randomUUID(),title:kind==="heading"?"Judul bagian baru":kind==="shop"?"Produk baru":"Link baru",url:kind==="heading"?"":"https://",group:kind==="shop"?"SHOP FALINTINO":"LINK UTAMA",icon:"link",showSocial:false,kind,price:kind==="shop"?"Rp0":"",productImage:"",productPhotos:[],productCropX:50,productCropY:50,description:""}]);}
  const detailMatch=pathname.match(/^\/shop\/([^/]+)\/?$/);
  const detailId=detailMatch?decodeURIComponent(detailMatch[1]):"";
  const detailProduct=detailId?profile.links.find(x=>x.id===detailId&&x.kind==="shop"):undefined;
